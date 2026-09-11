@@ -19,18 +19,18 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v4
 
+      - name: Generate Pac-Man contribution graph
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: ${{ github.repository_owner }}
+
       - name: Generate GitHub statistics card
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python .github/scripts/generate_stats.py
           mkdir -p dist
-          cp github-stats.svg dist/github-stats.svg
-
-      - name: Generate Pac-Man contribution graph
-        uses: abozanona/pacman-contribution-graph@main
-        with:
-          github_user_name: ${{ github.repository_owner }}
+          cp github-stats.svg dist/github-stats-v2.svg
 
       - name: Publish profile graphics
         uses: crazy-max/ghaction-github-pages@v4
