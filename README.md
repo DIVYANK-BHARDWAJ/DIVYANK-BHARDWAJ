@@ -58,7 +58,7 @@
 ###
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/github-stats.svg" width="820" alt="GitHub statistics" />
+  <img src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/github-stats-v2.svg" width="820" alt="GitHub statistics" />
 </div>
 
 ###
@@ -82,7 +82,7 @@
 ###
 
 <div align="center">
-  <img height="300" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWFk&fit=crop" />
+  <img height="300" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1read&fit=crop" />
 </div>
 
 ###
