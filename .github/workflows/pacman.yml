@@ -1,4 +1,4 @@
-name: Generate pacman animation
+name: Generate profile graphics
 
 on:
   schedule:
@@ -9,19 +9,30 @@ on:
       - main
 
 jobs:
-  generate:
+  graphics:
     permissions:
       contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+
+      - name: Generate GitHub statistics card
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python .github/scripts/generate_stats.py
+          mkdir -p dist
+          cp github-stats.svg dist/github-stats.svg
+
       - name: Generate Pac-Man contribution graph
         uses: abozanona/pacman-contribution-graph@main
         with:
           github_user_name: ${{ github.repository_owner }}
 
-      - name: Publish graph to output branch
+      - name: Publish profile graphics
         uses: crazy-max/ghaction-github-pages@v4
         with:
           build_dir: dist
