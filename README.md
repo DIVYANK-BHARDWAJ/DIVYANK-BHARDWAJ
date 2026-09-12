@@ -58,7 +58,7 @@
 ###
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=DIVYANK-BHARDWAJ&theme=radical&hide_total_contributions=true&hide_current_streak=true&hide_longest_streak=true" alt="GitHub Streak" />
+  <img src="https://github-readme-streak-stats.herokuapp.com?user=DIVYANK-BHARDWAJ&theme=burnt-neon&timezone=IST" alt="GitHub Streak" />
 </div>
 
 ###
