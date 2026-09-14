@@ -110,22 +110,20 @@ function normalize(value) {
 }
 
 function extractText(value, seen = new Set(), depth = 0) {
-  if (value == null || depth > 6) return '';
+  if (value == null || depth > 8) return '';
   if (typeof value === 'string') return value.trim();
   if (typeof value !== 'object' || seen.has(value)) return '';
   seen.add(value);
 
-  const preferred = ['text', 'markdown', 'content', 'preview', 'message'];
-  for (const key of preferred) {
+  for (const key of ['text', 'markdown', 'content']) {
     if (typeof value[key] === 'string' && value[key].trim()) return value[key].trim();
   }
 
   if (Array.isArray(value)) {
-    const parts = value.map(item => extractText(item, seen, depth + 1)).filter(Boolean);
-    return parts.join('\n');
+    return value.map(item => extractText(item, seen, depth + 1)).filter(Boolean).join('\n');
   }
 
-  for (const key of ['payload', 'data', 'message', 'blocks', 'card', 'content']) {
+  for (const key of ['payload', 'data', 'message', 'blocks', 'card']) {
     if (value[key] !== undefined) {
       const found = extractText(value[key], seen, depth + 1);
       if (found) return found;
@@ -135,9 +133,13 @@ function extractText(value, seen = new Set(), depth = 0) {
   return '';
 }
 
-function isLikelyBotResponse(message) {
+function looksLikeUserEcho(message, text) {
+  const answer = normalize(text);
+  const question = normalize(lastQuestion);
+  if (answer === question) return true;
+
   const raw = JSON.stringify(message || {}).toLowerCase();
-  return /incoming|bot|received|response/.test(raw);
+  return /direction["']?\s*:\s*["']?outgoing|type["']?\s*:\s*["']?user|user-message/.test(raw);
 }
 
 function handleBotpressMessage(message) {
@@ -145,24 +147,65 @@ function handleBotpressMessage(message) {
 
   console.debug('[DIVYANK TERMINAL] Botpress message:', message);
   const text = extractText(message);
-  if (!text) return;
-
-  const question = normalize(lastQuestion);
-  const answer = normalize(text);
-  if (!answer || answer === question) return;
-
-  // Botpress message events cover both user and bot messages. If direction/type
-  // is available, prefer incoming/bot events; otherwise accept the first
-  // non-identical text payload after our request.
-  if (!isLikelyBotResponse(message) && answer === question) return;
+  if (!text || looksLikeUserEcho(message, text)) return;
 
   clearResponseTimeout();
   waitingForAI = false;
   status.textContent = 'AI ONLINE';
   print([['ai', `AI  ${text}`]]);
 
-  // Keep the transport alive but remove the visual Webchat surface.
   try { window.botpress.close(); } catch (_) {}
+}
+
+/*
+ * Botpress owns the visual widget, but this portfolio does not need it.
+ * Remove both normal DOM nodes and any open shadow-root presentation layer.
+ * This runs repeatedly because the widget can be injected after page load.
+ */
+function suppressBotpressUI(root = document) {
+  const selectors = [
+    '#bp-web-widget-container',
+    'iframe[title="Botpress"]',
+    'iframe[src*="botpress"]',
+    'iframe[src*="bpcontent"]',
+    '.bpWebchat',
+    '.bpFab',
+    '[class*="bpWebchat"]',
+    '[class*="bpFab"]',
+  ];
+
+  try {
+    for (const selector of selectors) {
+      root.querySelectorAll(selector).forEach(node => {
+        if (node instanceof HTMLIFrameElement || node.id === 'bp-web-widget-container') {
+          node.style.setProperty('display', 'none', 'important');
+          node.style.setProperty('visibility', 'hidden', 'important');
+          node.style.setProperty('opacity', '0', 'important');
+          node.style.setProperty('pointer-events', 'none', 'important');
+          node.style.setProperty('position', 'fixed', 'important');
+          node.style.setProperty('left', '-10000px', 'important');
+          node.style.setProperty('top', '-10000px', 'important');
+          node.style.setProperty('width', '1px', 'important');
+          node.style.setProperty('height', '1px', 'important');
+        } else {
+          node.style.setProperty('display', 'none', 'important');
+        }
+      });
+    }
+
+    root.querySelectorAll('*').forEach(node => {
+      if (node.shadowRoot) suppressBotpressUI(node.shadowRoot);
+    });
+  } catch (error) {
+    console.debug('[DIVYANK TERMINAL] UI suppression probe:', error);
+  }
+}
+
+function startUISuppression() {
+  suppressBotpressUI();
+  const observer = new MutationObserver(() => suppressBotpressUI());
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  setInterval(suppressBotpressUI, 500);
 }
 
 function clearResponseTimeout() {
@@ -189,10 +232,7 @@ function attachBotpress() {
   if (listenersAttached) return;
   listenersAttached = true;
 
-  // Official Botpress events: message fires for sent/received messages and
-  // wildcard receives all Webchat events.
   window.botpress.on('message', handleBotpressMessage);
-  window.botpress.on('*', handleBotpressMessage);
 
   window.botpress.on('webchat:initialized', () => {
     status.textContent = 'AI ONLINE';
@@ -209,7 +249,6 @@ function attachBotpress() {
     if (waitingForAI) failAI(`Botpress error: ${error?.message || 'connection error'}`);
   });
 
-  // Generated embeds may finish before this script attaches listeners.
   if (typeof window.botpress.sendMessage === 'function') {
     botpressReady = true;
     status.textContent = 'AI ONLINE';
@@ -249,7 +288,7 @@ function askAI(question) {
   clearResponseTimeout();
   responseTimeout = setTimeout(() => {
     if (waitingForAI) {
-      failAI('The AI responded through Botpress, but the terminal did not receive the response event.');
+      failAI('Botpress generated a response, but the terminal bridge did not receive its message event.');
     }
   }, 30000);
 
@@ -265,7 +304,7 @@ function askAI(question) {
 
   try {
     window.botpress.open();
-  } catch (error) {
+  } catch (_) {
     failAI('Could not initialize the Botpress transport.');
   }
 }
@@ -334,4 +373,5 @@ print([
   ['', ''],
 ]);
 
+startUISuppression();
 attachBotpress();
