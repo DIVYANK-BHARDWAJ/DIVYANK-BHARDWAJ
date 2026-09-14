@@ -5,15 +5,8 @@ const status = document.querySelector('#status');
 const history = [];
 let historyIndex = 0;
 let botpressReady = false;
-let botpressInitialized = false;
+let botpressListenersAttached = false;
 let waitingForAI = false;
-
-const config = window.DIVYANK_BOTPRESS || {};
-const botpressConfigured =
-  config.botId &&
-  config.clientId &&
-  !config.botId.startsWith('YOUR_') &&
-  !config.clientId.startsWith('YOUR_');
 
 const commands = {
   help: () => [
@@ -123,24 +116,20 @@ function welcome() {
     ['', ''],
   ]);
 
-  if (botpressConfigured) {
-    initBotpress();
-  } else {
-    status.textContent = 'LOCAL MODE';
-    print([['muted', 'AI adapter ready — configure Botpress credentials to enable conversational mode.']]);
-  }
+  connectBotpress();
 }
 
-function initBotpress() {
-  if (botpressInitialized) return;
+function connectBotpress() {
+  if (botpressListenersAttached) return;
 
-  if (!window.botpress || !window.botpress.init) {
+  if (!window.botpress) {
     status.textContent = 'AI LOADING';
-    setTimeout(initBotpress, 250);
+    setTimeout(connectBotpress, 150);
     return;
   }
 
-  botpressInitialized = true;
+  botpressListenersAttached = true;
+  status.textContent = 'AI LOADING';
 
   try {
     window.botpress.on('webchat:ready', () => {
@@ -168,17 +157,18 @@ function initBotpress() {
       status.textContent = botpressReady ? 'AI ONLINE' : 'AI ERROR';
     });
 
-    window.botpress.init({
-      botId: config.botId,
-      clientId: config.clientId,
-      hideWidget: true,
-      showPoweredBy: false,
-    });
+    // The published Botpress Webchat v3.7 embed initializes itself.
+    // If it is already initialized before our listener attaches, use the
+    // presence of sendMessage as a fallback readiness signal.
+    if (typeof window.botpress.sendMessage === 'function') {
+      botpressReady = true;
+      status.textContent = 'AI ONLINE';
+      try { window.botpress.close(); } catch (_) {}
+    }
   } catch (error) {
-    console.error('Botpress initialization failed:', error);
-    botpressInitialized = false;
-    status.textContent = 'LOCAL MODE';
-    print([['warn', 'AI connection failed. Local terminal commands remain available.']]);
+    console.error('Botpress connection setup failed:', error);
+    botpressListenersAttached = false;
+    status.textContent = 'AI ERROR';
   }
 }
 
@@ -197,11 +187,12 @@ function extractBotpressText(message) {
 }
 
 async function askAI(question) {
-  if (!botpressReady || !window.botpress?.sendMessage) {
+  if (!botpressReady || typeof window.botpress?.sendMessage !== 'function') {
     print([
       ['warn', 'AI assistant is not connected yet.'],
-      ['muted', 'Publish the Botpress bot and configure terminal/botpress-config.js.'],
+      ['muted', 'Wait for the terminal status to show AI ONLINE, then try again.'],
     ]);
+    connectBotpress();
     return;
   }
 
@@ -269,7 +260,7 @@ form.addEventListener('submit', async (event) => {
 
   print([
     ['warn', `command not found: ${command}`],
-    ['muted', 'Type "help" for terminal commands or configure Botpress for natural-language AI.'],
+    ['muted', 'The AI is still connecting. Try again in a moment.'],
   ]);
 });
 
