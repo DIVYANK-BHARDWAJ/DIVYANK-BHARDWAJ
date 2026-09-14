@@ -22,12 +22,12 @@
   function getResponseText(raw) {
     const data = parseEvent(raw);
     const candidates = [
-      data.response,
       data.message,
       data.text,
       data.markdown,
       data.preview,
       data.answer,
+      data.response,
       data.content,
     ];
 
@@ -38,31 +38,31 @@
     return '';
   }
 
-  function renderAnswer(text) {
+  function handleCustomEvent(raw) {
+    console.debug('[DIVYANK TERMINAL] Botpress customEvent:', raw);
+    const data = parseEvent(raw);
+    if (data.eventType !== 'terminal_response' && data.eventType !== 'notification') return;
+
+    const text = getResponseText(data);
     if (!text) return;
 
-    // script.js owns the terminal response state. Let it clear the timeout,
-    // release the input, update status, and render the answer exactly once.
     if (typeof window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ === 'function') {
       window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__(text);
       return;
     }
 
-    // Safe fallback if script.js has not finished loading yet.
-    const output = document.querySelector('#output');
-    const status = document.querySelector('#status');
-    if (!output) return;
-
-    [...output.querySelectorAll('.line')].forEach(line => {
-      if (normalize(line.textContent).includes('ai thinking')) line.remove();
-    });
-
-    const div = document.createElement('div');
-    div.className = 'line ai';
-    div.textContent = `AI  ${text}`;
-    output.appendChild(div);
-    output.scrollTop = output.scrollHeight;
-    if (status) status.textContent = 'AI ONLINE';
+    // script.js normally installs the handler before this bridge receives events.
+    // If the event arrives exceptionally early, retry briefly instead of losing it.
+    let attempts = 0;
+    const retry = setInterval(() => {
+      attempts += 1;
+      if (typeof window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ === 'function') {
+        clearInterval(retry);
+        window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__(text);
+      } else if (attempts >= 20) {
+        clearInterval(retry);
+      }
+    }, 100);
   }
 
   function attach() {
@@ -71,12 +71,7 @@
       return;
     }
 
-    window.botpress.on('customEvent', event => {
-      console.debug('[DIVYANK TERMINAL] Botpress customEvent:', event);
-      const data = parseEvent(event);
-      if (data.eventType !== 'terminal_response') return;
-      renderAnswer(getResponseText(data));
-    });
+    window.botpress.on('customEvent', handleCustomEvent);
   }
 
   attach();
