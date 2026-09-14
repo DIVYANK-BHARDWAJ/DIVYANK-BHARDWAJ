@@ -1,0 +1,33 @@
+name: Build VANTA 1500-Q&A Knowledge Base
+
+on:
+  push:
+    paths:
+      - 'terminal/vanta-kb-parts/**'
+      - '.github/workflows/build-vanta-knowledge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Assemble 1500-Q&A knowledge base
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p terminal
+          : > terminal/divyank-knowledge.md
+          for f in terminal/vanta-kb-parts/part-*.md; do cat "$f" >> terminal/divyank-knowledge.md; done
+      - name: Commit generated knowledge base
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add terminal/divyank-knowledge.md
+          if git diff --cached --quiet; then echo 'No changes to commit.'; else git commit -m 'build: assemble complete VANTA 1500-Q&A knowledge base'; git push; fi
