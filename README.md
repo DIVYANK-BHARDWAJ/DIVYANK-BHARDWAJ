@@ -1,88 +1,257 @@
 <div align="center">
-  <img height="150" src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" />
+
+# DIVYANK BHARDWAJ
+
+### Computer Science Engineer • Builder • Problem Solver
+
+<p>
+  <a href="https://github.com/DIVYANK-BHARDWAJ"><img src="https://img.shields.io/badge/GitHub-DIVYANK--BHARDWAJ-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+  <a href="https://www.linkedin.com/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+</p>
+
+<p>
+  <img src="https://komarev.com/ghpvc/?username=DIVYANK-BHARDWAJ&style=flat-square&color=0f172a" alt="Profile views" />
+</p>
+
 </div>
 
-###
+---
+
+## ⚡ Who I Am
+
+I’m a **Computer Science Engineering student** focused on becoming the kind of engineer who can take an idea from **architecture → implementation → testing → deployment**.
+
+I like building systems that are more than demos: products with a clear user problem, thoughtful engineering, reliable APIs, clean interfaces, automated checks, and production-minded deployment.
+
+My current engineering focus sits at the intersection of:
+
+- **Full-Stack Engineering** — modern web applications, APIs, databases and real-time systems
+- **AI Engineering** — AI-native products, LLM-powered workflows and practical ML systems
+- **Systems & Infrastructure** — Linux, networking, cloud, containers, CI/CD and distributed-system fundamentals
+- **Problem Solving** — DSA, interview preparation and writing code that is understandable under pressure
+
+> **Build deeply. Understand the fundamentals. Ship relentlessly.**
+
+---
+
+## 🧭 What I'm Building Toward
+
+My goal is not to collect technologies. It is to become a **high-leverage software engineer** who can understand a problem, design the system, implement it, break it, observe it, and make it reliable.
+
+### Current learning stack
+
+**Languages**  
+`Java` `Python` `JavaScript` `C`
+
+**Frontend**  
+`React` `Next.js` `Tailwind CSS`
+
+**Backend**  
+`Node.js` `REST APIs` `WebSockets`
+
+**Data**  
+`PostgreSQL` `Prisma` `Neon`
+
+**AI / ML**  
+`LLM Applications` `AI Agents` `Machine Learning Fundamentals`
+
+**Cloud / DevOps**  
+`Git` `GitHub` `GitHub Actions` `Docker` `AWS` `Kubernetes` `CI/CD`
+
+**Foundations**  
+`DSA` `OOP` `DBMS` `Operating Systems` `Computer Networks` `System Design`
+
+---
+
+## 🚀 Engineering Philosophy
+
+```text
+Learn the fundamentals
+        ↓
+Build without shortcuts
+        ↓
+Test the ugly edge cases
+        ↓
+Automate the boring work
+        ↓
+Deploy it
+        ↓
+Observe it
+        ↓
+Improve it
+```
+
+I am intentionally moving away from **"vibecoding"** and toward understanding the code I ship: why an abstraction exists, where failure can happen, what the trade-offs are, and how the system behaves under real usage.
+
+---
+
+## 🧠 Core Areas I'm Developing
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### Software Engineering
+
+- Data Structures & Algorithms
+- Object-Oriented Design
+- Clean architecture
+- API design
+- Testing & debugging
+- Git workflows
+- Code reviews
+
+</td>
+<td width="50%" valign="top">
+
+### Systems & Infrastructure
+
+- Linux & networking fundamentals
+- Databases & data modeling
+- Distributed systems
+- Docker & containers
+- CI/CD pipelines
+- Cloud architecture
+- Observability
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### AI Engineering
+
+- LLM applications
+- Tool-using agents
+- RAG architectures
+- AI product design
+- Evaluation pipelines
+- ML fundamentals
+- Production integration
+
+</td>
+<td width="50%" valign="top">
+
+### Product Engineering
+
+- React / Next.js
+- Responsive UI systems
+- Real-time experiences
+- End-to-end shipping
+- Performance optimization
+- Developer experience
+- Documentation
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ Selected Work
+
+I use projects as engineering laboratories: each one should force me to learn something that a tutorial cannot teach.
+
+### JANVISTA AI
+
+An AI-focused product built around practical AI workflows and production-minded engineering.
+
+**Focus:** AI engineering • full-stack product development • automation • reliability
+
+> Repository: [JANVISTA-AI](https://github.com/DIVYANK-BHARDWAJ/JANVISTA-AI)
+
+### PALS / Event Platforms
+
+Web experiences and event infrastructure designed around strong UI systems, structured timelines, participant workflows and deployment-ready architecture.
+
+**Focus:** Next.js • React • Tailwind • APIs • databases • product UX
+
+### Hackathon Engineering
+
+I actively build for hackathons and technical challenges because they compress the complete engineering loop: understand the problem, choose constraints, prototype, integrate, debug and ship.
+
+**Focus:** rapid product development • AI integration • teamwork • demos that actually work
+
+> More projects are being developed as part of my long-term engineering roadmap.
+
+---
+
+## 🔥 Current Mission
+
+```text
+Become exceptionally strong at computer science fundamentals
+                    +
+Build production-grade software
+                    +
+Develop serious AI engineering depth
+                    +
+Learn cloud / infrastructure / distributed systems
+                    +
+Ship ambitious products
+```
+
+I’m optimizing for **depth over noise**: fewer technologies, better understanding, stronger projects.
+
+---
+
+## 📊 GitHub Activity
 
 <div align="center">
-  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="linkedin logo" />
-  <img src="https://img.shields.io/static/v1?message=Youtube&logo=youtube&label=&color=FF0000&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="youtube logo" />
-  <img src="https://img.shields.io/static/v1?message=Twitter&logo=twitter&label=&color=1DA1F2&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="twitter logo" />
-  <img src="https://img.shields.io/static/v1?message=Instagram&logo=instagram&label=&color=E4405F&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="instagram logo" />
-  <img src="https://img.shields.io/static/v1?message=HackerRank&logo=hackerrank&label=&color=2EC866&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="hackerrank logo" />
-  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="gmail logo" />
+
+<img src="https://github-readme-stats.vercel.app/api?username=DIVYANK-BHARDWAJ&show_icons=true&hide_border=true&rank_icon=github&include_all_commits=true&count_private=true" height="170" alt="GitHub statistics" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DIVYANK-BHARDWAJ&layout=compact&hide_border=true&langs_count=8" height="170" alt="Top languages" />
+
+<br />
+
+<img src="https://streak-stats.demolab.com?user=DIVYANK-BHARDWAJ&hide_border=true" height="170" alt="GitHub streak" />
+
 </div>
 
-###
+---
 
-<h1 align="center">hey there 👋</h1>
-
-###
-
-<h3 align="left">👩‍💻 About Me</h3>
-
-###
-
-<p align="left">🚀 Computer Science Engineering student with a curious mind and a passion for exploring the ever-evolving world of technology. I’m driven by the excitement of discovering new tools, ideas, and innovations that shape the future.<br><br>💡 I enjoy solving problems—whether it's debugging code, tackling algorithmic challenges, or building efficient solutions from scratch. Each challenge is an opportunity to learn, grow, and think differently.<br><br>🔧 Constantly learning, experimenting, and improving, I aim to turn ideas into impactful projects and meaningful code.<br><br>🌱 Always open to collaboration, new perspectives, and pushing the boundaries of what I know.<br><br>- 📚 I am currently pursuing my B.E. in Computer Science and Engineering.<br><br>- 🌐 Currently focused on mastering Web Development and Data Structures & Algorithms, with a goal to build scalable, impactful projects that solve real-world problems and make a meaningful difference.<br><br>- ⚡ In my free time, I enjoy exploring engaging content and sharpening my mind by solving logical problems that challenge my thinking.</p>
-
-###
-
-<h3 align="left">🛠 Language and tools</h3>
-
-###
-
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" alt="git logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" height="40" alt="gitlab logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" height="40" alt="anaconda logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="nodejs logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" height="40" alt="notion logo" />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" height="40" alt="jira logo" />
-</div>
-
-###
-
-<h3 align="left">🔥 My Stats</h3>
-
-###
+## 📈 Contribution Graph
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=DIVYANK-BHARDWAJ&theme=burnt-neon&timezone=IST" alt="GitHub Streak" />
+
+<img src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph-dark.svg" alt="Contribution graph" />
+
 </div>
 
-###
+---
 
-<div align="left">
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/discord/default.svg" width="52" height="40" alt="discord logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg" width="52" height="40" alt="youtube logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/hackerrank/default.svg" width="52" height="40" alt="hackerrank logo" />
-</div>
+## 🧰 Toolbelt
 
-###
+<p>
+  <img src="https://skillicons.dev/icons?i=java,python,c,js,react,nextjs,nodejs,tailwind,postgres,prisma,docker,aws,kubernetes,git,github,githubactions,vscode,linux&perline=9" alt="Technology stack" />
+</p>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg">
-</picture>
+---
 
-###
+## 🎯 What I Care About
+
+**Engineering depth** — understanding systems instead of memorizing APIs.  
+**Shipping** — turning ideas into working software.  
+**Reliability** — testing, automation, observability and failure handling.  
+**AI with substance** — using AI where it creates real product value.  
+**Continuous improvement** — every project should make the next project better.
+
+---
+
+## 🌐 Find Me
 
 <div align="center">
-  <img height="300" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1read&fit=crop" />
+
+[![GitHub](https://img.shields.io/badge/GitHub-111827?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DIVYANK-BHARDWAJ)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
+
 </div>
 
-###
+---
+
+<div align="center">
+
+### ⚡ Build. Break. Learn. Ship. Repeat.
+
+<sub>This profile is a living snapshot of an engineer in progress.</sub>
+
+</div>
