@@ -7,6 +7,19 @@
   color: #e6edf3;
 }
 
+/* Botpress is used only as the invisible AI transport. The terminal is the UI. */
+#bp-web-widget-container,
+#bp-web-widget-container iframe,
+.bpWebchat,
+.bpFab,
+.bp-widget-widget,
+[class*="bpWebchat"],
+[class*="bpFab"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -54,6 +67,7 @@ body {
 .accent { color: #79c0ff; }
 .success { color: #7ee787; }
 .warn { color: #d29922; }
+.ai { color: #e6edf3; }
 
 .prompt-row {
   display: flex;
