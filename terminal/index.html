@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Divyank Bhardwaj — interactive engineering terminal." />
+  <title>Divyank — Terminal</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="terminal-shell">
+    <header class="terminal-bar">
+      <div class="traffic"><span></span><span></span><span></span></div>
+      <div class="title">divyank@github: ~</div>
+      <div class="status">ONLINE</div>
+    </header>
+    <section id="output" class="output" aria-live="polite"></section>
+    <form id="terminal-form" class="prompt-row" autocomplete="off">
+      <span class="prompt">divyank@github:~$</span>
+      <input id="command" aria-label="Terminal command" autofocus spellcheck="false" />
+    </form>
+  </main>
+  <script src="./script.js"></script>
+</body>
+</html>
