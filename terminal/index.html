@@ -12,7 +12,7 @@
     <header class="terminal-bar">
       <div class="traffic"><span></span><span></span><span></span></div>
       <div class="title">divyank@github: ~</div>
-      <div class="status">ONLINE</div>
+      <div class="status" id="status">ONLINE</div>
     </header>
     <section id="output" class="output" aria-live="polite"></section>
     <form id="terminal-form" class="prompt-row" autocomplete="off">
@@ -20,6 +20,9 @@
       <input id="command" aria-label="Terminal command" autofocus spellcheck="false" />
     </form>
   </main>
+
+  <script src="./botpress-config.js"></script>
+  <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
   <script src="./script.js"></script>
 </body>
 </html>
