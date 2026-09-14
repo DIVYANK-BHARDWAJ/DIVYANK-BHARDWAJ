@@ -1,8 +1,4 @@
 (() => {
-  function normalize(value) {
-    return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
-  }
-
   function parseEvent(raw) {
     let data = raw;
 
@@ -19,50 +15,58 @@
     return data && typeof data === 'object' ? data : {};
   }
 
-  function getResponseText(raw) {
-    const data = parseEvent(raw);
-    const candidates = [
-      data.message,
-      data.text,
-      data.markdown,
-      data.preview,
-      data.answer,
-      data.response,
-      data.content,
-    ];
+  function getResponseText(raw, seen = new Set(), depth = 0) {
+    if (raw == null || depth > 8) return '';
+    if (typeof raw === 'string') return raw.trim();
+    if (typeof raw !== 'object' || seen.has(raw)) return '';
+    seen.add(raw);
 
-    for (const candidate of candidates) {
-      if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+    for (const key of ['message', 'text', 'markdown', 'preview', 'answer', 'response', 'content']) {
+      if (typeof raw[key] === 'string' && raw[key].trim()) return raw[key].trim();
+    }
+
+    if (Array.isArray(raw)) {
+      return raw.map(item => getResponseText(item, seen, depth + 1)).filter(Boolean).join('\n');
+    }
+
+    for (const key of ['payload', 'data', 'event', 'blocks', 'card', 'body', 'result']) {
+      if (raw[key] !== undefined) {
+        const found = getResponseText(raw[key], seen, depth + 1);
+        if (found) return found;
+      }
     }
 
     return '';
   }
 
-  function handleCustomEvent(raw) {
-    console.debug('[DIVYANK TERMINAL] Botpress customEvent:', raw);
+  function forward(raw) {
     const data = parseEvent(raw);
-    if (data.eventType !== 'terminal_response' && data.eventType !== 'notification') return;
+    const eventType = String(
+      data.eventType || data.type || data.event?.eventType || data.event?.type || ''
+    ).toLowerCase();
 
     const text = getResponseText(data);
     if (!text) return;
 
-    if (typeof window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ === 'function') {
-      window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__(text);
-      return;
-    }
+    const rawJson = JSON.stringify(data).toLowerCase();
+    const isUserMessage =
+      /direction["']?\s*:\s*["']?outgoing/.test(rawJson) ||
+      /type["']?\s*:\s*["']?user/.test(rawJson) ||
+      /user-message/.test(rawJson);
 
-    // script.js normally installs the handler before this bridge receives events.
-    // If the event arrives exceptionally early, retry briefly instead of losing it.
-    let attempts = 0;
-    const retry = setInterval(() => {
-      attempts += 1;
+    if (isUserMessage && eventType !== 'terminal_response') return;
+
+    if (
+      eventType === 'terminal_response' ||
+      eventType === 'notification' ||
+      eventType === 'customevent' ||
+      eventType === 'message' ||
+      /direction["']?\s*:\s*["']?incoming/.test(rawJson)
+    ) {
       if (typeof window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ === 'function') {
-        clearInterval(retry);
         window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__(text);
-      } else if (attempts >= 20) {
-        clearInterval(retry);
       }
-    }, 100);
+    }
   }
 
   function attach() {
@@ -71,7 +75,22 @@
       return;
     }
 
-    window.botpress.on('customEvent', handleCustomEvent);
+    console.debug('[DIVYANK TERMINAL] Response bridge attached');
+
+    window.botpress.on('customEvent', event => {
+      console.debug('[DIVYANK TERMINAL] customEvent:', event);
+      forward(event);
+    });
+
+    window.botpress.on('message', event => {
+      console.debug('[DIVYANK TERMINAL] message:', event);
+      forward(event);
+    });
+
+    window.botpress.on('*', event => {
+      console.debug('[DIVYANK TERMINAL] wildcard:', event);
+      forward(event);
+    });
   }
 
   attach();
