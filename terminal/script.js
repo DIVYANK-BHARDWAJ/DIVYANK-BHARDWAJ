@@ -110,12 +110,12 @@ function normalize(value) {
 }
 
 function extractText(value, seen = new Set(), depth = 0) {
-  if (value == null || depth > 8) return '';
+  if (value == null || depth > 10) return '';
   if (typeof value === 'string') return value.trim();
   if (typeof value !== 'object' || seen.has(value)) return '';
   seen.add(value);
 
-  for (const key of ['text', 'markdown', 'content']) {
+  for (const key of ['text', 'markdown', 'content', 'preview', 'answer', 'response', 'message', 'title', 'value']) {
     if (typeof value[key] === 'string' && value[key].trim()) return value[key].trim();
   }
 
@@ -123,7 +123,7 @@ function extractText(value, seen = new Set(), depth = 0) {
     return value.map(item => extractText(item, seen, depth + 1)).filter(Boolean).join('\n');
   }
 
-  for (const key of ['payload', 'data', 'message', 'blocks', 'card']) {
+  for (const key of ['payload', 'data', 'message', 'messages', 'blocks', 'card', 'event', 'body', 'result']) {
     if (value[key] !== undefined) {
       const found = extractText(value[key], seen, depth + 1);
       if (found) return found;
@@ -133,13 +133,24 @@ function extractText(value, seen = new Set(), depth = 0) {
   return '';
 }
 
+function getEventType(message) {
+  if (!message || typeof message !== 'object') return '';
+  return String(
+    message.eventType || message.type || message.event?.eventType || message.event?.type || ''
+  ).toLowerCase();
+}
+
 function looksLikeUserEcho(message, text) {
   const answer = normalize(text);
   const question = normalize(lastQuestion);
-  if (answer === question) return true;
+  if (!answer || answer === question) return true;
 
   const raw = JSON.stringify(message || {}).toLowerCase();
-  return /direction["']?\s*:\s*["']?outgoing|type["']?\s*:\s*["']?user|user-message/.test(raw);
+  return (
+    /direction["']?\s*:\s*["']?outgoing/.test(raw) ||
+    /type["']?\s*:\s*["']?user/.test(raw) ||
+    /user-message/.test(raw)
+  );
 }
 
 function handleAIResponse(text) {
@@ -149,21 +160,51 @@ function handleAIResponse(text) {
   waitingForAI = false;
   status.textContent = 'VANTA ONLINE';
   print([['ai', `VANTA  ${text}`]]);
-
-  try { window.botpress.close(); } catch (_) {}
-}
-
-function handleBotpressMessage(message) {
-  if (!waitingForAI) return;
-
-  console.debug('[DIVYANK TERMINAL] Botpress message:', message);
-  const text = extractText(message);
-  if (!text || looksLikeUserEcho(message, text)) return;
-
-  handleAIResponse(text);
+  // Keep the Botpress transport alive. Closing it after every response can
+  // cause mobile browsers to suspend/recreate the embedded transport.
 }
 
 window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ = handleAIResponse;
+
+function handleIncomingEvent(event) {
+  if (!waitingForAI || !event) return;
+
+  console.debug('[DIVYANK TERMINAL] Botpress event:', event);
+  const eventType = getEventType(event);
+
+  if (eventType === 'terminal_response' || eventType === 'notification') {
+    const customText = extractText(event);
+    if (customText) {
+      handleAIResponse(customText);
+      return;
+    }
+  }
+
+  const text = extractText(event);
+  if (!text || looksLikeUserEcho(event, text)) return;
+
+  const raw = JSON.stringify(event).toLowerCase();
+  const isClearlyIncoming =
+    /direction["']?\s*:\s*["']?incoming/.test(raw) ||
+    /type["']?\s*:\s*["']?(bot|incoming)/.test(raw) ||
+    /role["']?\s*:\s*["']?(assistant|bot)/.test(raw);
+
+  if (eventType === 'message' || isClearlyIncoming) handleAIResponse(text);
+}
+
+function handleCustomEvent(event) {
+  handleIncomingEvent({
+    ...((event && typeof event === 'object') ? event : {}),
+    eventType: event?.eventType || 'customEvent'
+  });
+}
+
+function handleBotpressMessage(message) {
+  handleIncomingEvent({
+    ...((message && typeof message === 'object') ? message : {}),
+    eventType: message?.eventType || 'message'
+  });
+}
 
 function suppressBotpressUI(root = document) {
   const selectors = [
@@ -180,19 +221,12 @@ function suppressBotpressUI(root = document) {
   try {
     for (const selector of selectors) {
       root.querySelectorAll(selector).forEach(node => {
-        if (node instanceof HTMLIFrameElement || node.id === 'bp-web-widget-container') {
-          node.style.setProperty('display', 'none', 'important');
-          node.style.setProperty('visibility', 'hidden', 'important');
-          node.style.setProperty('opacity', '0', 'important');
-          node.style.setProperty('pointer-events', 'none', 'important');
-          node.style.setProperty('position', 'fixed', 'important');
-          node.style.setProperty('left', '-10000px', 'important');
-          node.style.setProperty('top', '-10000px', 'important');
-          node.style.setProperty('width', '1px', 'important');
-          node.style.setProperty('height', '1px', 'important');
-        } else {
-          node.style.setProperty('display', 'none', 'important');
-        }
+        // Keep Botpress mounted/alive. Do not use display:none on the
+        // transport because some mobile browsers can suspend hidden embeds.
+        node.style.setProperty('opacity', '0', 'important');
+        node.style.setProperty('visibility', 'hidden', 'important');
+        node.style.setProperty('pointer-events', 'none', 'important');
+        node.style.setProperty('z-index', '-1', 'important');
       });
     }
 
@@ -208,7 +242,7 @@ function startUISuppression() {
   suppressBotpressUI();
   const observer = new MutationObserver(() => suppressBotpressUI());
   observer.observe(document.documentElement, { childList: true, subtree: true });
-  setInterval(suppressBotpressUI, 500);
+  setInterval(suppressBotpressUI, 1000);
 }
 
 function clearResponseTimeout() {
@@ -236,9 +270,16 @@ function attachBotpress() {
   listenersAttached = true;
 
   window.botpress.on('message', handleBotpressMessage);
+  window.botpress.on('customEvent', handleCustomEvent);
+  // Compatibility layer for Webchat event-shape differences.
+  window.botpress.on('*', event => {
+    if (event?.type === 'message' || event?.eventType === 'terminal_response') {
+      handleIncomingEvent(event);
+    }
+  });
 
   window.botpress.on('webchat:initialized', () => {
-    status.textContent = 'VANTA ONLINE';
+    status.textContent = waitingForAI ? 'VANTA THINKING' : 'VANTA ONLINE';
   });
 
   window.botpress.on('webchat:ready', () => {
@@ -251,24 +292,22 @@ function attachBotpress() {
     console.error('[DIVYANK TERMINAL] Botpress error:', error);
     if (waitingForAI) failAI(`Botpress error: ${error?.message || 'connection error'}`);
   });
-
-  if (typeof window.botpress.sendMessage === 'function') {
-    botpressReady = true;
-    status.textContent = 'VANTA ONLINE';
-  }
 }
 
-function sendPendingQuestion() {
+async function sendPendingQuestion() {
   if (!waitingForAI || !lastQuestion) return;
-  if (typeof window.botpress?.sendMessage !== 'function') {
-    failAI('Botpress is not ready to receive messages yet.');
+
+  if (!window.botpress || typeof window.botpress.sendMessage !== 'function') {
+    failAI('VANTA is not ready to receive messages yet. Refresh and try again.');
     return;
   }
 
-  window.botpress.sendMessage(lastQuestion).catch(error => {
+  try {
+    await window.botpress.sendMessage(lastQuestion);
+  } catch (error) {
     console.error('[DIVYANK TERMINAL] sendMessage failed:', error);
     failAI(`Botpress error: ${error?.message || 'message could not be sent'}`);
-  });
+  }
 }
 
 function askAI(question) {
@@ -291,9 +330,9 @@ function askAI(question) {
   clearResponseTimeout();
   responseTimeout = setTimeout(() => {
     if (waitingForAI) {
-      failAI('VANTA generated a response, but the terminal bridge did not receive it.');
+      failAI('VANTA generated a response, but the terminal did not receive the Botpress event.');
     }
-  }, 30000);
+  }, 45000);
 
   if (botpressReady && typeof window.botpress.sendMessage === 'function') {
     sendPendingQuestion();
@@ -307,8 +346,9 @@ function askAI(question) {
 
   try {
     window.botpress.open();
+    // webchat:ready will send the pending question.
   } catch (_) {
-    failAI('Could not initialize the VANTA transport.');
+    failAI('Could not initialize the VANTA transport. Refresh and try again.');
   }
 }
 
