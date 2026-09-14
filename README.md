@@ -32,7 +32,7 @@
 ###
 
 <div align="center">
-  <a href="./terminal/">
+  <a href="https://DIVYANK-BHARDWAJ.github.io/DIVYANK-BHARDWAJ/terminal/">
     <img src="https://img.shields.io/badge/▶%20LAUNCH%20INTERACTIVE%20TERMINAL-11161D?style=for-the-badge&logo=gnubash&logoColor=7EE787" alt="Launch Interactive Terminal" />
   </a>
 </div>
