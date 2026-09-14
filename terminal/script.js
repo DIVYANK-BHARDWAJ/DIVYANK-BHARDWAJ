@@ -1,22 +1,35 @@
 const output = document.querySelector('#output');
 const form = document.querySelector('#terminal-form');
 const input = document.querySelector('#command');
+const status = document.querySelector('#status');
 const history = [];
 let historyIndex = 0;
+let botpressReady = false;
+
+const config = window.DIVYANK_BOTPRESS || {};
+const botpressConfigured =
+  config.botId &&
+  config.clientId &&
+  !config.botId.startsWith('YOUR_') &&
+  !config.clientId.startsWith('YOUR_');
 
 const commands = {
   help: () => [
     ['accent', 'Available commands'],
-    ['', 'about       About Divyank'],
-    ['', 'skills      Languages and tools'],
-    ['', 'projects    Featured engineering projects'],
-    ['', 'repos       GitHub repositories'],
-    ['', 'journey     Current engineering journey'],
-    ['', 'education   Education'],
-    ['', 'hackathons  Hackathon and collaboration focus'],
-    ['', 'contact     Contact / social links'],
-    ['', 'github      Open GitHub profile'],
-    ['', 'clear       Clear terminal'],
+    ['', 'ask <question>  Ask the AI about Divyank'],
+    ['', 'about            About Divyank'],
+    ['', 'skills           Languages and tools'],
+    ['', 'projects         Featured engineering projects'],
+    ['', 'repos            GitHub repositories'],
+    ['', 'journey          Current engineering journey'],
+    ['', 'education        Education'],
+    ['', 'hackathons       Hackathon and collaboration focus'],
+    ['', 'contact          Contact / social links'],
+    ['', 'github           Open GitHub profile'],
+    ['', 'clear            Clear terminal'],
+    ['', ''],
+    ['muted', 'You can also type a complete sentence without "ask".'],
+    ['muted', 'Example: "What technologies does Divyank work with?"'],
   ],
   about: () => [
     ['accent', 'DIVYANK BHARDWAJ'],
@@ -103,30 +116,136 @@ function welcome() {
     ['accent', '│        Interactive Engineering Terminal             │'],
     ['accent', '╰──────────────────────────────────────────────────────╯'],
     ['', ''],
-    ['', 'Welcome. Type "help" to explore the portfolio.'],
-    ['muted', 'Tip: try about, skills, projects, repos or journey.'],
+    ['', 'Welcome. This terminal understands natural-language questions.'],
+    ['', 'Try: "What skills does Divyank have?"'],
+    ['muted', 'Or type "help" to see commands.'],
     ['', ''],
   ]);
+
+  if (botpressConfigured) {
+    initBotpress();
+  } else {
+    status.textContent = 'LOCAL MODE';
+    print([
+      ['muted', 'AI adapter is ready but Botpress credentials are not configured yet.'],
+    ]);
+  }
 }
 
-form.addEventListener('submit', (event) => {
+function initBotpress() {
+  if (!window.botpress || !window.botpress.init) {
+    status.textContent = 'AI LOADING';
+    setTimeout(initBotpress, 250);
+    return;
+  }
+
+  try {
+    window.botpress.init({
+      botId: config.botId,
+      clientId: config.clientId,
+      hideWidget: true,
+      enableConversationDeletion: false,
+      showPoweredBy: false,
+    });
+
+    if (window.botpress.on) {
+      window.botpress.on('message', (event) => {
+        const message = event?.message;
+        if (!message || message.direction !== 'incoming') return;
+        const text = extractBotpressText(message);
+        if (text) print([['ai', `AI  ${text}`]]);
+      });
+    }
+
+    botpressReady = true;
+    status.textContent = 'AI ONLINE';
+    print([['success', 'AI assistant connected. Ask anything about Divyank.']]);
+  } catch (error) {
+    console.error('Botpress initialization failed:', error);
+    status.textContent = 'LOCAL MODE';
+    print([['warn', 'AI connection failed. Local terminal commands remain available.']]);
+  }
+}
+
+function extractBotpressText(message) {
+  if (typeof message.payload?.text === 'string') return message.payload.text;
+  if (typeof message.text === 'string') return message.text;
+  if (typeof message.payload?.markdown === 'string') return message.payload.markdown;
+  return '';
+}
+
+async function askAI(question) {
+  if (!botpressReady || !window.botpress?.sendMessage) {
+    print([
+      ['warn', 'AI assistant is not connected yet.'],
+      ['muted', 'Add the Botpress botId and clientId in terminal/botpress-config.js.'],
+    ]);
+    return;
+  }
+
+  status.textContent = 'THINKING';
+  print([['muted', 'AI  thinking...']]);
+
+  try {
+    await window.botpress.sendMessage({
+      type: 'text',
+      text: question,
+    });
+    status.textContent = 'AI ONLINE';
+  } catch (error) {
+    console.error('Botpress message failed:', error);
+    status.textContent = 'AI ONLINE';
+    print([['warn', 'The AI could not process that message. Try again.']]);
+  }
+}
+
+function isNaturalLanguageQuestion(raw) {
+  const words = raw.trim().split(/\s+/);
+  return words.length >= 3 || /[?!.,]/.test(raw);
+}
+
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
   const raw = input.value.trim();
   if (!raw) return;
+
   history.push(raw);
   historyIndex = history.length;
   print([['muted', `divyank@github:~$ ${raw}`]]);
-
-  const command = raw.toLowerCase().split(/\s+/)[0];
-  if (commands[command]) {
-    print(commands[command]());
-  } else {
-    print([
-      ['warn', `command not found: ${command}`],
-      ['muted', 'Type "help" to see available commands.'],
-    ]);
-  }
   input.value = '';
+
+  const normalized = raw.toLowerCase();
+  const command = normalized.split(/\s+/)[0];
+  const remainder = raw.slice(command.length).trim();
+
+  if (command === 'ask') {
+    if (!remainder) {
+      print([['warn', 'Usage: ask <your question>']]);
+      return;
+    }
+    await askAI(remainder);
+    return;
+  }
+
+  if (commands[command] && !isNaturalLanguageQuestion(raw)) {
+    print(commands[command]());
+    return;
+  }
+
+  if (commands[command] && !remainder) {
+    print(commands[command]());
+    return;
+  }
+
+  if (botpressReady) {
+    await askAI(raw);
+    return;
+  }
+
+  print([
+    ['warn', `command not found: ${command}`],
+    ['muted', 'Ask a full question after Botpress is connected, or type "help".'],
+  ]);
 });
 
 input.addEventListener('keydown', (event) => {
