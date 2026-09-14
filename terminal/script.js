@@ -140,26 +140,38 @@ function initBotpress() {
   }
 
   try {
+    window.botpress.on('webchat:ready', () => {
+      botpressReady = true;
+      status.textContent = 'AI ONLINE';
+      print([['success', 'AI assistant connected. Ask anything about Divyank.']]);
+      // The terminal uses Webchat as a headless transport, so keep the visible
+      // Botpress widget closed after establishing the conversation channel.
+      window.botpress.close();
+    });
+
+    window.botpress.on('message', (message) => {
+      if (!message || message.direction !== 'outgoing') return;
+      const text = extractBotpressText(message);
+      if (text) print([['ai', `AI  ${text}`]]);
+    });
+
+    window.botpress.on('error', (error) => {
+      console.error('Botpress error:', error);
+      status.textContent = botpressReady ? 'AI ONLINE' : 'AI ERROR';
+    });
+
     window.botpress.init({
       botId: config.botId,
       clientId: config.clientId,
       hideWidget: true,
-      enableConversationDeletion: false,
       showPoweredBy: false,
     });
 
-    if (window.botpress.on) {
-      window.botpress.on('message', (event) => {
-        const message = event?.message;
-        if (!message || message.direction !== 'incoming') return;
-        const text = extractBotpressText(message);
-        if (text) print([['ai', `AI  ${text}`]]);
-      });
-    }
-
-    botpressReady = true;
-    status.textContent = 'AI ONLINE';
-    print([['success', 'AI assistant connected. Ask anything about Divyank.']]);
+    // Botpress exposes sendMessage after Webchat becomes ready. Opening it
+    // programmatically triggers that lifecycle event without requiring a click.
+    window.botpress.on('webchat:initialized', () => {
+      window.botpress.open();
+    });
   } catch (error) {
     console.error('Botpress initialization failed:', error);
     status.textContent = 'LOCAL MODE';
@@ -168,9 +180,9 @@ function initBotpress() {
 }
 
 function extractBotpressText(message) {
-  if (typeof message.payload?.text === 'string') return message.payload.text;
-  if (typeof message.text === 'string') return message.text;
-  if (typeof message.payload?.markdown === 'string') return message.payload.markdown;
+  if (typeof message?.payload?.text === 'string') return message.payload.text;
+  if (typeof message?.text === 'string') return message.text;
+  if (typeof message?.payload?.markdown === 'string') return message.payload.markdown;
   return '';
 }
 
@@ -178,7 +190,7 @@ async function askAI(question) {
   if (!botpressReady || !window.botpress?.sendMessage) {
     print([
       ['warn', 'AI assistant is not connected yet.'],
-      ['muted', 'Add the Botpress botId and clientId in terminal/botpress-config.js.'],
+      ['muted', 'Make sure Botpress is published and terminal/botpress-config.js has botId + clientId.'],
     ]);
     return;
   }
@@ -187,10 +199,8 @@ async function askAI(question) {
   print([['muted', 'AI  thinking...']]);
 
   try {
-    await window.botpress.sendMessage({
-      type: 'text',
-      text: question,
-    });
+    // Botpress expects the message itself as a string.
+    await window.botpress.sendMessage(question);
     status.textContent = 'AI ONLINE';
   } catch (error) {
     console.error('Botpress message failed:', error);
