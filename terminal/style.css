@@ -7,17 +7,30 @@
   color: #e6edf3;
 }
 
-/* Botpress is used only as the invisible AI transport. The terminal is the UI. */
+/* Botpress is an invisible transport. The terminal is the only UI. */
 #bp-web-widget-container,
 #bp-web-widget-container iframe,
+iframe[title="Botpress"],
+iframe[src*="botpress"],
+iframe[src*="bpcontent"],
 .bpWebchat,
 .bpFab,
 .bp-widget-widget,
 [class*="bpWebchat"],
 [class*="bpFab"] {
-  display: none !important;
+  opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
+  position: fixed !important;
+  inset: auto auto -10000px -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  max-width: 1px !important;
+  max-height: 1px !important;
+  min-width: 1px !important;
+  min-height: 1px !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 body {
