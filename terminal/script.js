@@ -13,7 +13,7 @@ let listenersAttached = false;
 const commands = {
   help: () => [
     ['accent', 'Available commands'],
-    ['', 'ask <question>  Ask the AI about Divyank'],
+    ['', 'ask <question>  Ask VANTA about Divyank'],
     ['', 'about            About Divyank'],
     ['', 'skills           Languages and tools'],
     ['', 'projects         Featured engineering projects'],
@@ -147,8 +147,8 @@ function handleAIResponse(text) {
 
   clearResponseTimeout();
   waitingForAI = false;
-  status.textContent = 'AI ONLINE';
-  print([['ai', `AI  ${text}`]]);
+  status.textContent = 'VANTA ONLINE';
+  print([['ai', `VANTA  ${text}`]]);
 
   try { window.botpress.close(); } catch (_) {}
 }
@@ -165,11 +165,6 @@ function handleBotpressMessage(message) {
 
 window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ = handleAIResponse;
 
-/*
- * Botpress owns the visual widget, but this portfolio does not need it.
- * Remove both normal DOM nodes and any open shadow-root presentation layer.
- * This runs repeatedly because the widget can be injected after page load.
- */
 function suppressBotpressUI(root = document) {
   const selectors = [
     '#bp-web-widget-container',
@@ -226,13 +221,13 @@ function clearResponseTimeout() {
 function failAI(message) {
   clearResponseTimeout();
   waitingForAI = false;
-  status.textContent = 'AI ERROR';
+  status.textContent = 'VANTA ERROR';
   print([['warn', message]]);
 }
 
 function attachBotpress() {
   if (!window.botpress || typeof window.botpress.on !== 'function') {
-    status.textContent = 'AI LOADING';
+    status.textContent = 'VANTA LOADING';
     setTimeout(attachBotpress, 150);
     return;
   }
@@ -243,12 +238,12 @@ function attachBotpress() {
   window.botpress.on('message', handleBotpressMessage);
 
   window.botpress.on('webchat:initialized', () => {
-    status.textContent = 'AI ONLINE';
+    status.textContent = 'VANTA ONLINE';
   });
 
   window.botpress.on('webchat:ready', () => {
     botpressReady = true;
-    status.textContent = waitingForAI ? 'THINKING' : 'AI ONLINE';
+    status.textContent = waitingForAI ? 'VANTA THINKING' : 'VANTA ONLINE';
     if (waitingForAI) sendPendingQuestion();
   });
 
@@ -259,7 +254,7 @@ function attachBotpress() {
 
   if (typeof window.botpress.sendMessage === 'function') {
     botpressReady = true;
-    status.textContent = 'AI ONLINE';
+    status.textContent = 'VANTA ONLINE';
   }
 }
 
@@ -278,25 +273,25 @@ function sendPendingQuestion() {
 
 function askAI(question) {
   if (!window.botpress || typeof window.botpress.on !== 'function') {
-    print([['warn', 'AI assistant is still loading. Try again in a moment.']]);
+    print([['warn', 'VANTA is still loading. Try again in a moment.']]);
     attachBotpress();
     return;
   }
 
   if (waitingForAI) {
-    print([['muted', 'AI is still answering the previous question.']]);
+    print([['muted', 'VANTA is still answering the previous question.']]);
     return;
   }
 
   waitingForAI = true;
   lastQuestion = question;
-  status.textContent = 'THINKING';
-  print([['muted', 'AI  thinking...']]);
+  status.textContent = 'VANTA THINKING';
+  print([['muted', 'VANTA  thinking...']]);
 
   clearResponseTimeout();
   responseTimeout = setTimeout(() => {
     if (waitingForAI) {
-      failAI('Botpress generated a response, but the terminal bridge did not receive its message event.');
+      failAI('VANTA generated a response, but the terminal bridge did not receive it.');
     }
   }, 30000);
 
@@ -306,14 +301,14 @@ function askAI(question) {
   }
 
   if (typeof window.botpress.open !== 'function') {
-    failAI('Botpress Webchat is not initialized yet. Refresh and try again.');
+    failAI('VANTA transport is not initialized yet. Refresh and try again.');
     return;
   }
 
   try {
     window.botpress.open();
   } catch (_) {
-    failAI('Could not initialize the Botpress transport.');
+    failAI('Could not initialize the VANTA transport.');
   }
 }
 
