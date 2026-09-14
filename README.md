@@ -1,505 +1,548 @@
 <div align="center">
 
 <a href="https://github.com/DIVYANK-BHARDWAJ">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0f172a,50:312e81,100:111827&text=DIVYANK%20BHARDWAJ&fontSize=52&fontColor=ffffff&fontAlignY=40&desc=CS%20ENGINEER%20%7C%20AI%20BUILDER%20%7C%20SYSTEMS%20ENTHUSIAST&descAlignY=62&descSize=18&animation=fadeIn" alt="Divyank Bhardwaj" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=260&color=0:020617,25:111827,55:312e81,80:4c1d95,100:020617&text=DIVYANK%20BHARDWAJ&fontSize=56&fontColor=ffffff&fontAlignY=38&desc=COMPUTER%20SCIENCE%20ENGINEER%20%E2%80%A2%20AI%20%E2%80%A2%20SYSTEMS%20%E2%80%A2%20BUILDER&descAlignY=58&descSize=18&animation=fadeIn" alt="Divyank Bhardwaj" />
 </a>
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2600&pause=900&color=8B5CF6&center=true&vCenter=true&width=820&lines=Building+AI-native+products+that+solve+real+problems.;Learning+systems+from+the+metal+up.;Turning+ideas+into+tested%2C+observable%2C+deployable+software.;DSA+%7C+Distributed+Systems+%7C+AI+%7C+Cloud+%7C+Full+Stack" alt="Typing introduction" />
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=800&size=18&duration=2200&pause=650&color=A78BFA&center=true&vCenter=true&width=900&lines=%E2%9A%A1+BUILDING+THE+ENGINEER+I+WANT+TO+BECOME.;%F0%9F%A7%A0+AI+%7C+SYSTEMS+%7C+FULL+STACK+%7C+CLOUD;%F0%9F%94%A5+LEARN.+BUILD.+BREAK.+SHIP.+REPEAT.;%F0%9F%9A%80+FROM+FUNDAMENTALS+TO+PRODUCTION.;%F0%9F%8C%8C+ONE+SYSTEM+AT+A+TIME.+NO+SHORTCUTS." alt="Animated introduction" />
 
-<br />
+<br/>
 
-<a href="https://github.com/DIVYANK-BHARDWAJ"><img src="https://img.shields.io/badge/GitHub-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
-<a href="https://www.linkedin.com/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-<img src="https://komarev.com/ghpvc/?username=DIVYANK-BHARDWAJ&style=for-the-badge&color=312e81&label=PROFILE+VIEWS" alt="Profile views" />
+<a href="https://github.com/DIVYANK-BHARDWAJ"><img src="https://img.shields.io/badge/%E2%9A%94%EF%B8%8F_GITHUB-111827?style=for-the-badge&logo=github&logoColor=white" /></a>
+<a href="https://www.linkedin.com/"><img src="https://img.shields.io/badge/%F0%9F%94%97_LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+<img src="https://komarev.com/ghpvc/?username=DIVYANK-BHARDWAJ&style=for-the-badge&color=4c1d95&label=%F0%9F%91%80+VISITORS" />
+
+<br/><br/>
+
+> **⚡ I don't want to just use technology. I want to understand it, build with it, break it, and master it.**
 
 </div>
 
 ---
 
-## `> whoami`
+## 🧬 `SYSTEM.IDENTITY`
 
 ```text
-Divyank Bhardwaj
-├── Computer Science Engineering student
-├── Builder of AI-native + full-stack systems
-├── Deepening: DSA, OS, DBMS, Networks & System Design
-├── Exploring: LLMs, agents, ML, distributed systems & cloud
-├── Philosophy: understand → build → test → deploy → observe → improve
-└── Mission: become an engineer who can own a system end-to-end
+┌───────────────────────────────────────────────────────────────┐
+│                         DIVYANK.EXE                           │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│  🎓  Computer Science Engineering                             │
+│  🧠  Problem Solver                                           │
+│  🤖  AI Engineer in the making                               │
+│  🏗️  Systems Builder                                         │
+│  🌐  Full-Stack Developer                                     │
+│  ☁️  Cloud / Infrastructure Explorer                          │
+│                                                               │
+│  STATUS:        ██████████████████████████  ONLINE            │
+│  MODE:          ⚔️  BUILD                                     │
+│  PHILOSOPHY:    DEPTH > NOISE                                 │
+│  OBJECTIVE:     BECOME EXCEPTIONALLY GOOD                     │
+│                                                               │
+└───────────────────────────────────────────────────────────────┘
 ```
-
-I don't want to be someone who merely knows how to use a framework.
-
-I want to understand **why the system works**, what happens when it fails, how it behaves at scale, and how to turn an idea into software that can survive outside a tutorial.
-
-> **Build deeply. Understand the fundamentals. Ship relentlessly.**
 
 ---
 
-## ⚔️ THE MISSION
+# 🌌 THE ENGINEERING UNIVERSE
 
 ```text
-                    ┌──────────────────────────┐
-                    │     COMPUTER SCIENCE     │
-                    │                          │
-                    │ DSA • OS • DBMS • CN     │
-                    │ OOP • Networks • Design  │
-                    └────────────┬─────────────┘
-                                 │
-                                 ▼
-                    ┌──────────────────────────┐
-                    │   SOFTWARE ENGINEERING   │
-                    │                          │
-                    │ APIs • Testing • Git     │
-                    │ Architecture • DX       │
-                    └────────────┬─────────────┘
-                                 │
-             ┌───────────────────┼───────────────────┐
-             ▼                   ▼                   ▼
-       ┌───────────┐       ┌───────────┐       ┌───────────┐
-       │    AI     │       │   CLOUD   │       │  PRODUCT  │
-       │           │       │           │       │           │
-       │ LLMs      │       │ Docker    │       │ UX        │
-       │ Agents    │       │ AWS       │       │ Frontend  │
-       │ ML        │       │ CI/CD     │       │ Backend   │
-       └─────┬─────┘       └─────┬─────┘       └─────┬─────┘
-             │                   │                   │
-             └───────────────────┼───────────────────┘
-                                 ▼
-                    ┌──────────────────────────┐
-                    │    PRODUCTION SYSTEMS    │
-                    │                          │
-                    │ Secure • Tested • Fast   │
-                    │ Observable • Scalable    │
-                    └──────────────────────────┘
+                              🌌
+                         ENGINEERING
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+          🧠 THEORY        🛠️ BUILD          ⚡ SHIP
+              │               │               │
+              └───────────────┼───────────────┘
+                              ▼
+                         🔬 BREAK IT
+                              │
+                              ▼
+                         🛡️ HARDEN IT
+                              │
+                              ▼
+                         📊 OBSERVE IT
+                              │
+                              ▼
+                         🚀 SCALE IT
+                              │
+                              ▼
+                       🧬 UNDERSTAND IT
 ```
 
-The objective isn't to collect technologies.
+### 🔥 The rule
 
-**The objective is engineering leverage.**
-
----
-
-# 🚀 WHAT I'M BUILDING
-
-I use projects as engineering laboratories. Each serious project should force me to learn something that a course or tutorial cannot fully teach.
-
-### 🧠 AI-Native Systems
-
-Building toward AI systems where models are part of the product architecture—not a chatbot bolted onto a website.
-
-**Exploring:**
-
-`LLM Applications` `Agents` `RAG` `Tool Calling` `Evaluation` `Multimodal AI` `ML` `AI Infrastructure`
-
-### 🌐 Full-Stack Products
-
-Designing complete applications from interface to API to database to deployment.
-
-**Stack:**
-
-`React` `Next.js` `Tailwind CSS` `Node.js` `REST` `WebSockets` `PostgreSQL` `Prisma`
-
-### ☁️ Systems & Infrastructure
-
-Learning what happens beneath the framework layer.
-
-**Focus:**
-
-`Linux` `Networking` `Docker` `AWS` `CI/CD` `GitHub Actions` `Kubernetes` `Observability` `Distributed Systems`
-
-### 🧩 Computer Science Foundations
-
-The layer I refuse to skip.
-
-**Focus:**
-
-`Java` `DSA` `OOP` `DBMS` `Operating Systems` `Computer Networks` `System Design`
+> **If I cannot explain it, debug it, and rebuild the important parts of it, I don't consider it mastered.**
 
 ---
 
-# 🏗️ FLAGSHIP BUILD PROGRAM
-
-I'm working toward a small number of ambitious systems instead of an endless list of toy projects.
-
-| Project | Direction | Status |
-|---|---|---|
-| **NOVIQ** | AI-native distributed system / flagship engineering build | 🔨 Building |
-| **JANVISTA AI** | AI-native public-infrastructure intelligence platform | 🔨 Building |
-| **ARGUS** | Flagship systems / intelligence build | 🧠 In development |
-| **Hackathon Systems** | Rapid product engineering + AI integration | ⚡ Active |
-
-The standard for these projects is deliberately high:
-
-```text
-Idea
- ↓
-Product requirements
- ↓
-Architecture
- ↓
-Data model
- ↓
-Implementation
- ↓
-Tests
- ↓
-Security
- ↓
-CI/CD
- ↓
-Deployment
- ↓
-Observability
- ↓
-Load / failure thinking
- ↓
-Documentation
-```
-
-A project is not "done" because the UI works.
-
-**Done means the engineering story makes sense.**
-
----
-
-# 🧪 SELECTED PUBLIC WORK
-
-### 🌱 OpenEnv — exploration & experimentation
-
-Exploring agentic execution environments and the engineering patterns around isolated environments, APIs, containers and AI/RL workflows.
-
-→ [OpenEnv repository](https://github.com/DIVYANK-BHARDWAJ/OpenEnv)
-
-### 🧰 Labs
-
-A public workspace for experiments, learning and technical exploration.
-
-→ [Labs repository](https://github.com/DIVYANK-BHARDWAJ/labs)
-
-### 🌐 Landing Page Deployment
-
-Hands-on work around shipping web experiences and deployment workflows.
-
-→ [Repository](https://github.com/DIVYANK-BHARDWAJ/landing-page-deployment)
-
-### 🧠 More builds
-
-My GitHub contains experiments across web development, hackathons, learning systems and larger private builds. The goal is to continuously convert learning into artifacts that can be inspected, tested and improved.
-
-→ [Explore all repositories](https://github.com/DIVYANK-BHARDWAJ?tab=repositories)
-
----
-
-# 🧠 ENGINEERING STACK
+# ⚔️ MY CURRENT BATTLEFIELD
 
 <div align="center">
 
-### Languages
-
-<img src="https://skillicons.dev/icons?i=java,python,c,js,ts&perline=8" alt="Languages" />
-
-### Frontend & Backend
-
-<img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,nodejs,express&perline=8" alt="Web stack" />
-
-### Data & Infrastructure
-
-<img src="https://skillicons.dev/icons?i=postgres,prisma,docker,aws,kubernetes,linux,nginx&perline=8" alt="Infrastructure stack" />
-
-### Developer Tooling
-
-<img src="https://skillicons.dev/icons?i=git,github,githubactions,vscode,postman&perline=8" alt="Developer tooling" />
+| 🧠 Computer Science | 🤖 AI Engineering | ☁️ Infrastructure |
+|:---:|:---:|:---:|
+| DSA | LLMs | Docker |
+| OOP | Agents | AWS |
+| DBMS | RAG | Kubernetes |
+| OS | Tool Calling | CI/CD |
+| Networks | Evaluation | Linux |
+| System Design | ML | Observability |
 
 </div>
 
 ---
 
-# 🤖 AI ENGINEERING MAP
+# 🧠 THE CS CORE
 
 ```text
-                         AI ENGINEERING
+                         COMPUTER SCIENCE
+                                │
+       ┌────────────────────────┼────────────────────────┐
+       ▼                        ▼                        ▼
+      🧩 DSA                  🖥️ OS                   🗄️ DBMS
+       │                        │                        │
+   Algorithms              Processes                Transactions
+   Data Structures         Threads                  Indexing
+   Complexity              Memory                   Query Plans
+   Graphs                  Scheduling               Storage
+       │                        │                        │
+       └────────────────────────┼────────────────────────┘
+                                ▼
+                         🌐 NETWORKING
+                                │
+                         TCP/IP • HTTP
+                         DNS • TLS • APIs
+                                │
+                                ▼
+                       🏛️ SYSTEM DESIGN
+                                │
+                    Scalability • Reliability
+                  Caching • Queues • Replication
+                    Consistency • Partitioning
+```
+
+---
+
+# 🤖 AI ENGINEERING — NOT JUST API CALLS
+
+```text
+                         🤖 AI SYSTEM
+                              │
+             ┌────────────────┼────────────────┐
+             ▼                ▼                ▼
+          🧠 MODEL         🧩 CONTEXT       🛠️ TOOLS
+             │                │                │
+           LLMs             RAG              APIs
+           ML               Memory           Functions
+           Embeddings       Retrieval        Browsers
+           Multimodal       Grounding        Databases
+             │                │                │
+             └────────────────┼────────────────┘
+                              ▼
+                         🔬 EVALUATION
+                              │
+                  Accuracy • Safety • Cost
+                    Latency • Reliability
+                              │
+                              ▼
+                         🚀 PRODUCTION
+```
+
+My goal is to move beyond **"I integrated an AI API"** toward understanding the engineering required to build AI systems that are reliable, measurable, explainable and useful.
+
+---
+
+# 🏗️ FULL-STACK → PRODUCTION
+
+```text
+🎨 UI
+ │
+ ▼
+⚛️ React / Next.js
+ │
+ ▼
+🔌 APIs / WebSockets
+ │
+ ▼
+🧠 Backend Services
+ │
+ ▼
+🗄️ PostgreSQL / Data Layer
+ │
+ ▼
+🐳 Docker
+ │
+ ▼
+⚙️ CI/CD
+ │
+ ▼
+☁️ Cloud
+ │
+ ▼
+📈 Monitoring + Logs + Traces
+ │
+ ▼
+🛡️ Reliable Production System
+```
+
+---
+
+# 🧪 MY ENGINEERING LOOP
+
+```text
+        💡 IDEA
+          │
+          ▼
+      📋 REQUIREMENTS
+          │
+          ▼
+      🏛️ ARCHITECTURE
+          │
+          ▼
+      🧩 IMPLEMENT
+          │
+          ▼
+      🧪 TEST
+          │
+          ▼
+      💥 BREAK
+          │
+          ▼
+      🛡️ HARDEN
+          │
+          ▼
+      ⚙️ AUTOMATE
+          │
+          ▼
+      🚀 DEPLOY
+          │
+          ▼
+      📡 OBSERVE
+          │
+          ▼
+      🔁 ITERATE
+          │
+          └──────────────► 💡
+```
+
+---
+
+# 🎛️ INTERACTIVE CONTROL PANEL
+
+<details>
+<summary>🧠 <b>Click to open: My Engineering Mindset</b></summary>
+
+<br/>
+
+```text
+┌──────────────────────────────────────────────┐
+│             🧠 MINDSET.PROFILE               │
+├──────────────────────────────────────────────┤
+│                                              │
+│  Curiosity        ████████████████████ 100% │
+│  Persistence      ███████████████████░  95% │
+│  Systems Thinking ██████████████████░░  90% │
+│  Builder Energy   ████████████████████ 100% │
+│  Comfort Zone     ██░░░░░░░░░░░░░░░░░  10% │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+**Core beliefs:**
+
+- 🧱 Fundamentals compound.
+- 🔬 Failure is data.
+- 🧠 Understanding beats memorization.
+- 🚀 Shipping beats endless planning.
+- 🛡️ Reliability is a feature.
+- 📚 Every hard bug is a lesson.
+- ⚡ Consistency beats motivation.
+
+</details>
+
+<details>
+<summary>⚔️ <b>Click to open: The Rules of the Arena</b></summary>
+
+<br/>
+
+```text
+RULE 01  →  Don't blindly copy code.
+RULE 02  →  Understand the abstraction.
+RULE 03  →  Read the error before fixing it.
+RULE 04  →  Test the ugly path.
+RULE 05  →  Automate repeatable work.
+RULE 06  →  Document important decisions.
+RULE 07  →  Prefer depth over technology collecting.
+RULE 08  →  Build things difficult enough to expose weaknesses.
+RULE 09  →  Keep learning after the demo works.
+RULE 10  →  Never confuse activity with progress.
+```
+
+</details>
+
+<details>
+<summary>🛰️ <b>Click to open: My System Design Checklist</b></summary>
+
+<br/>
+
+```text
+☐ Requirements
+☐ Constraints
+☐ API contracts
+☐ Data model
+☐ Scaling strategy
+☐ Caching
+☐ Database indexing
+☐ Async processing
+☐ Failure modes
+☐ Security
+☐ Observability
+☐ Deployment
+☐ Cost
+☐ Trade-offs
+☐ Disaster recovery
+```
+
+</details>
+
+<details>
+<summary>🤖 <b>Click to open: AI System Checklist</b></summary>
+
+<br/>
+
+```text
+☐ Model selection
+☐ Prompt / context strategy
+☐ Retrieval quality
+☐ Tool safety
+☐ Grounding
+☐ Hallucination handling
+☐ Evaluation dataset
+☐ Offline evaluation
+☐ Online monitoring
+☐ Latency budget
+☐ Token / inference cost
+☐ Guardrails
+☐ Human escalation
+☐ Observability
+```
+
+</details>
+
+<details>
+<summary>💻 <b>Click to open: Developer Mode</b></summary>
+
+<br/>
+
+```bash
+$ whoami
+> divyank
+
+$ mode
+> BUILD
+
+$ philosophy
+> depth-over-noise
+
+$ status
+> learning / building / breaking / shipping
+
+$ next
+> become significantly better than yesterday
+
+$ exit
+> permission denied 😈
+```
+
+</details>
+
+---
+
+# 🌳 SKILL TREE
+
+```text
+                         👑 ENGINEERING
                                │
-          ┌────────────────────┼────────────────────┐
-          │                    │                    │
-          ▼                    ▼                    ▼
-       MODELS               SYSTEMS              PRODUCT
-          │                    │                    │
-     LLMs / ML            RAG / Agents         AI UX
-     Embeddings            Tool Calling         Workflows
-     Multimodal            Memory               Evaluation
-     Fine-tuning           Orchestration        Human-in-loop
-          │                    │                    │
-          └────────────────────┼────────────────────┘
+             ┌─────────────────┼─────────────────┐
+             │                 │                 │
+             ▼                 ▼                 ▼
+          🧠 CORE           🛠️ BUILD          🤖 AI
+             │                 │                 │
+      ┌──────┼──────┐    ┌─────┼─────┐    ┌─────┼─────┐
+      ▼      ▼      ▼    ▼     ▼     ▼    ▼     ▼     ▼
+     DSA     OS    DBMS  Web  APIs  Data  LLM   RAG  Agents
+      │      │      │    │     │     │     │     │     │
+      └──────┼──────┘    └─────┼─────┘    └─────┼─────┘
+             │                 │                 │
+             └─────────────────┼─────────────────┘
                                ▼
-                         RELIABLE AI
+                         ☁️ INFRASTRUCTURE
                                │
-                  ┌────────────┼────────────┐
-                  ▼            ▼            ▼
-               Quality      Safety       Cost
-               Eval         Guardrails    Latency
-               Tracing      Validation    Scale
-```
-
-My focus is moving from **"calling an LLM API"** toward understanding the engineering around AI systems: context, retrieval, tools, evaluation, failure modes, latency, cost, observability and reliable product behavior.
-
----
-
-# 🏛️ SYSTEMS I'M LEARNING TO DESIGN
-
-| Layer | What I'm learning |
-|---|---|
-| **Application** | APIs, auth, validation, caching, real-time communication |
-| **Data** | PostgreSQL, indexing, transactions, schema design, query performance |
-| **Distributed** | queues, consistency, replication, partitioning, fault tolerance |
-| **Infrastructure** | containers, Linux, networking, cloud, orchestration |
-| **Reliability** | logging, metrics, tracing, health checks, failure recovery |
-| **Delivery** | CI/CD, automated testing, deployment strategies |
-| **AI Systems** | model routing, RAG, agents, evaluation, guardrails |
-
----
-
-# 🛡️ MY ENGINEERING BAR
-
-A production-minded feature should answer more than **"does it work?"**
-
-```text
-             DOES IT WORK?
-                   │
-                   ▼
-             Is it tested?
-                   │
-                   ▼
-             Is it secure?
-                   │
-                   ▼
-             Is it observable?
-                   │
-                   ▼
-             Does it fail safely?
-                   │
-                   ▼
-             Can it be deployed?
-                   │
-                   ▼
-             Can it be maintained?
-                   │
-                   ▼
-             Can I explain it?
-```
-
-That last question matters.
-
-**If I cannot explain the code, I don't truly own the code.**
-
----
-
-# 🔥 LEARNING OPERATING SYSTEM
-
-```text
-┌─────────────────────────────────────────────────────┐
-│                    LEARN                            │
-│  Understand the concept and the underlying model.  │
-└────────────────────────┬────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────┐
-│                    BUILD                            │
-│  Implement it without hiding behind abstractions. │
-└────────────────────────┬────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────┐
-│                    BREAK                            │
-│  Test edge cases. Inject failures. Find weaknesses.│
-└────────────────────────┬────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────┐
-│                    SHIP                             │
-│  Deploy it. Document it. Make it usable.           │
-└────────────────────────┬────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────┐
-│                   OBSERVE                           │
-│  Measure behavior instead of guessing.             │
-└────────────────────────┬────────────────────────────┘
-                         ▼
-┌─────────────────────────────────────────────────────┐
-│                   ITERATE                           │
-│  Improve the system—and become a better engineer.  │
-└─────────────────────────────────────────────────────┘
+                    Docker • AWS • K8s
+                    CI/CD • Linux • Git
+                               │
+                               ▼
+                       🏛️ SYSTEM DESIGN
+                               │
+                               ▼
+                         🚀 PRODUCTION
 ```
 
 ---
 
-# 📚 COMPUTER SCIENCE CORE
-
-I am deliberately building the fundamentals underneath the frameworks.
-
-```text
-DSA
- ├── Arrays / Strings
- ├── Linked Lists / Stacks / Queues
- ├── Trees / Heaps / Graphs
- ├── Hashing
- ├── Recursion / Backtracking
- ├── Greedy / DP
- └── Complexity & problem solving
-
-SYSTEMS
- ├── Operating Systems
- ├── Computer Networks
- ├── Databases
- ├── Concurrency
- ├── Distributed Systems
- └── System Design
-
-SOFTWARE ENGINEERING
- ├── OOP / SOLID
- ├── Architecture
- ├── Testing
- ├── Git
- ├── APIs
- ├── Security
- └── CI/CD
-```
-
----
-
-# 📊 GITHUB TELEMETRY
+# 🧰 TECHNICAL TOOLBELT
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=DIVYANK-BHARDWAJ&show_icons=true&hide_border=true&rank_icon=github&include_all_commits=true&count_private=true&custom_title=Divyank%27s%20GitHub%20Telemetry" height="175" alt="GitHub statistics" />
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DIVYANK-BHARDWAJ&layout=compact&hide_border=true&langs_count=10&custom_title=Languages%20Across%20My%20Repositories" height="175" alt="Top languages" />
-
-<br />
-
-<img src="https://streak-stats.demolab.com?user=DIVYANK-BHARDWAJ&hide_border=true&mode=weekly" height="175" alt="GitHub contribution streak" />
+<img src="https://skillicons.dev/icons?i=java,python,c,js,ts,react,nextjs,tailwind,nodejs,express,postgres,prisma,docker,aws,kubernetes,linux,git,github,githubactions,vscode,postman&perline=7" alt="Technology stack" />
 
 </div>
 
 ---
 
-# 🐍 CONTRIBUTION FLOW
+# 📡 ENGINEERING TELEMETRY
+
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=DIVYANK-BHARDWAJ&show_icons=true&hide_border=true&rank_icon=github&include_all_commits=true&count_private=true&custom_title=%E2%9A%A1%20ENGINEERING%20TELEMETRY" height="180" />
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DIVYANK-BHARDWAJ&layout=compact&hide_border=true&langs_count=10&custom_title=%F0%9F%A7%A9%20CODEBASE%20COMPOSITION" height="180" />
+
+<br/>
+
+<img src="https://streak-stats.demolab.com?user=DIVYANK-BHARDWAJ&hide_border=true&mode=weekly&fire=FF6B00" height="180" />
+
+</div>
+
+---
+
+# 🐍 CONTRIBUTION MATRIX
 
 <div align="center">
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg">
-  <img alt="GitHub contribution graph" src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg" />
+  <img alt="Contribution graph" src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg" />
 </picture>
 
 </div>
 
 ---
 
-# 🧭 CURRENTLY IN THE ARENA
+# 🌐 THE ARCHITECTURE OF MY GROWTH
 
 ```text
-[████████████████████░░]  DSA & Problem Solving
-[█████████████████░░░░░]  Full-Stack Engineering
-[███████████████░░░░░░░]  AI Engineering
-[██████████████░░░░░░░░]  Systems & Distributed Computing
-[████████████░░░░░░░░░░]  Cloud / DevOps
-[██████████░░░░░░░░░░░░]  System Design
+                     📚 KNOWLEDGE
+                          │
+                          ▼
+                    🧠 UNDERSTANDING
+                          │
+                          ▼
+                      🛠️ PRACTICE
+                          │
+                          ▼
+                       💻 BUILD
+                          │
+                          ▼
+                       💥 FAIL
+                          │
+                          ▼
+                     🔍 DEBUG
+                          │
+                          ▼
+                      🧪 TEST
+                          │
+                          ▼
+                     🚀 SHIP
+                          │
+                          ▼
+                     📊 MEASURE
+                          │
+                          ▼
+                    🧬 INTERNALIZE
+                          │
+                          └──────────────► 📚
 ```
 
-> Progress bars are intentionally a mindset, not a claim of objective proficiency.
+---
+
+# 🎯 WHAT I'M OPTIMIZING FOR
+
+| Dimension | Target |
+|---|---|
+| 🧠 Fundamentals | **Exceptional depth** |
+| 🧩 Problem solving | **Strong reasoning** |
+| 🏗️ Engineering | **Production mindset** |
+| 🤖 AI | **Real systems, not demos** |
+| ☁️ Cloud | **Understand infrastructure** |
+| 🌐 Web | **End-to-end ownership** |
+| 🛡️ Reliability | **Design for failure** |
+| 📈 Growth | **Compounding improvement** |
 
 ---
 
-# 🧪 THINGS I LIKE TO BUILD
-
-- AI-native products
-- Developer tools
-- Intelligent dashboards
-- Real-time web systems
-- Agentic workflows
-- Data-heavy applications
-- Infrastructure experiments
-- Hackathon products
-- Systems that turn messy inputs into useful decisions
-
----
-
-# 🧩 WHEN I BUILD A NEW PROJECT
+# 🔥 THE STANDARD
 
 ```text
-01  Problem
-    ↓
-02  User + constraints
-    ↓
-03  Requirements
-    ↓
-04  Architecture
-    ↓
-05  Data model + API contracts
-    ↓
-06  Implementation
-    ↓
-07  Automated tests
-    ↓
-08  Security + failure modes
-    ↓
-09  CI/CD
-    ↓
-10  Deployment
-    ↓
-11  Observability
-    ↓
-12  Documentation
+A tutorial can teach me syntax.
+A framework can teach me an API.
+A project can teach me implementation.
+
+But difficult systems teach judgment.
+
+                    ↓
+
+             🧠 UNDERSTAND
+                    ↓
+             🏗️ ARCHITECT
+                    ↓
+             💻 IMPLEMENT
+                    ↓
+             🧪 VALIDATE
+                    ↓
+             💥 BREAK
+                    ↓
+             🛡️ HARDEN
+                    ↓
+             🚀 SHIP
+                    ↓
+             📡 OPERATE
 ```
 
-This is the difference I am trying to build between **making software** and **engineering software**.
+**That's the engineer I'm trying to become.**
 
 ---
 
-# 🎯 LONG-TERM DIRECTION
-
-I am aiming toward roles where I can work across the boundary between **software engineering, AI and systems**.
-
-```text
-Software Engineer
-       │
-       ├──────────────► AI Engineer
-       │
-       ├──────────────► ML / AI Systems
-       │
-       ├──────────────► Backend / Distributed Systems
-       │
-       └──────────────► Product / Platform Engineering
-```
-
-The common denominator is the same:
-
-**strong fundamentals + strong execution + strong engineering judgment.**
-
----
-
-# 🌐 CONNECT
+# 🏁 FINAL STATUS
 
 <div align="center">
 
-<a href="https://github.com/DIVYANK-BHARDWAJ">
-  <img src="https://img.shields.io/badge/GitHub-Follow-111827?style=for-the-badge&logo=github&logoColor=white" alt="Follow on GitHub" />
-</a>
-<a href="https://www.linkedin.com/">
-  <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect on LinkedIn" />
-</a>
+```text
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║             ⚡ BUILD. BREAK. LEARN. SHIP. ⚡             ║
+║                                                          ║
+║       🧠 Fundamentals  +  🛠️ Engineering  +  🤖 AI      ║
+║                                                          ║
+║                   STATUS: IN PROGRESS                    ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+```
 
-</div>
+### 🌌 `The journey is the system. The system is always evolving.`
 
----
+<sub>⚡ No shortcuts. 🧠 No shallow learning. 🚀 Keep building.</sub>
 
-<div align="center">
+<br/>
 
-### ⚡ BUILD. BREAK. LEARN. SHIP. REPEAT.
+<a href="https://github.com/DIVYANK-BHARDWAJ?tab=repositories">🗂️ Explore GitHub</a> •
+<a href="https://github.com/DIVYANK-BHARDWAJ">⚔️ Enter the Arena</a>
 
-<sub>Not finished. Not supposed to be.</sub>
+<br/><br/>
 
-<br />
-
-<img src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:111827,50:312e81,100:0f172a" alt="Footer" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=140&section=footer&color=0:020617,30:312e81,70:4c1d95,100:020617&animation=twinkling" alt="Animated footer" />
 
 </div>
