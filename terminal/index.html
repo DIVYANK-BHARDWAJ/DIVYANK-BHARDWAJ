@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Divyank Bhardwaj — interactive engineering terminal." />
   <title>Divyank — Terminal</title>
-  <link rel="stylesheet" href="./style.css?v=20260915-4" />
+  <link rel="stylesheet" href="./style.css?v=20260915-5" />
   <style>
-    /* Botpress is the AI transport; the terminal is the only visible UI. */
+    /* Botpress remains mounted as the transport, but the terminal is the
+       only visible UI. Do not use display:none because some mobile browsers
+       can suspend hidden embedded content. */
     .bpWebchat,
     .bpFab,
     [class*="bpWebchat"],
     [class*="bpFab"] {
-      display: none !important;
+      opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
     }
@@ -36,7 +38,7 @@
        transport while the portfolio terminal remains the user interface. -->
   <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
   <script src="https://files.bpcontent.cloud/2026/09/14/19/20260914190719-XPY8Q3UH.js" defer></script>
-  <script src="./script.js?v=20260915-6"></script>
-  <script src="./botpress-terminal-bridge.js?v=20260915-3"></script>
+  <script src="./script.js?v=20260915-7"></script>
+  <script src="./botpress-terminal-bridge.js?v=20260915-4"></script>
 </body>
 </html>
