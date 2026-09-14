@@ -142,12 +142,8 @@ function looksLikeUserEcho(message, text) {
   return /direction["']?\s*:\s*["']?outgoing|type["']?\s*:\s*["']?user|user-message/.test(raw);
 }
 
-function handleBotpressMessage(message) {
-  if (!waitingForAI) return;
-
-  console.debug('[DIVYANK TERMINAL] Botpress message:', message);
-  const text = extractText(message);
-  if (!text || looksLikeUserEcho(message, text)) return;
+function handleAIResponse(text) {
+  if (!waitingForAI || !text) return;
 
   clearResponseTimeout();
   waitingForAI = false;
@@ -156,6 +152,18 @@ function handleBotpressMessage(message) {
 
   try { window.botpress.close(); } catch (_) {}
 }
+
+function handleBotpressMessage(message) {
+  if (!waitingForAI) return;
+
+  console.debug('[DIVYANK TERMINAL] Botpress message:', message);
+  const text = extractText(message);
+  if (!text || looksLikeUserEcho(message, text)) return;
+
+  handleAIResponse(text);
+}
+
+window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ = handleAIResponse;
 
 /*
  * Botpress owns the visual widget, but this portfolio does not need it.
