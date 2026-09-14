@@ -1,10 +1,4 @@
 (() => {
-  const output = document.querySelector('#output');
-  const status = document.querySelector('#status');
-  if (!output) return;
-
-  let handled = false;
-
   function normalize(value) {
     return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
   }
@@ -28,12 +22,12 @@
   function getResponseText(raw) {
     const data = parseEvent(raw);
     const candidates = [
+      data.response,
       data.message,
       data.text,
       data.markdown,
       data.preview,
       data.answer,
-      data.response,
       data.content,
     ];
 
@@ -45,8 +39,19 @@
   }
 
   function renderAnswer(text) {
-    if (!text || handled) return;
-    handled = true;
+    if (!text) return;
+
+    // script.js owns the terminal response state. Let it clear the timeout,
+    // release the input, update status, and render the answer exactly once.
+    if (typeof window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__ === 'function') {
+      window.__DIVYANK_TERMINAL_HANDLE_RESPONSE__(text);
+      return;
+    }
+
+    // Safe fallback if script.js has not finished loading yet.
+    const output = document.querySelector('#output');
+    const status = document.querySelector('#status');
+    if (!output) return;
 
     [...output.querySelectorAll('.line')].forEach(line => {
       if (normalize(line.textContent).includes('ai thinking')) line.remove();
@@ -57,9 +62,7 @@
     div.textContent = `AI  ${text}`;
     output.appendChild(div);
     output.scrollTop = output.scrollHeight;
-
     if (status) status.textContent = 'AI ONLINE';
-    try { window.botpress.close(); } catch (_) {}
   }
 
   function attach() {
@@ -71,7 +74,7 @@
     window.botpress.on('customEvent', event => {
       console.debug('[DIVYANK TERMINAL] Botpress customEvent:', event);
       const data = parseEvent(event);
-      if (data.eventType !== 'terminal_response' && data.eventType !== 'notification') return;
+      if (data.eventType !== 'terminal_response') return;
       renderAnswer(getResponseText(data));
     });
   }
