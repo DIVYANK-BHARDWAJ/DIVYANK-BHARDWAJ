@@ -4,14 +4,11 @@ const input = document.querySelector('#command');
 const status = document.querySelector('#status');
 const history = [];
 let historyIndex = 0;
-let botpressInitialized = false;
-let botpressReady = false;
-let botpressListenersAttached = false;
 let waitingForAI = false;
 let lastQuestion = '';
 let responseTimeout = null;
-let botpressPoll = null;
-let diagnosticShown = false;
+let botpressReady = false;
+let listenersAttached = false;
 
 const commands = {
   help: () => [
@@ -108,162 +105,64 @@ function print(lines) {
   output.scrollTop = output.scrollHeight;
 }
 
-function welcome() {
-  print([
-    ['accent', '╭──────────────────────────────────────────────────────╮'],
-    ['accent', '│              DIVYANK BHARDWAJ                       │'],
-    ['accent', '│        Interactive Engineering Terminal             │'],
-    ['accent', '╰──────────────────────────────────────────────────────╯'],
-    ['', ''],
-    ['', 'Welcome. Ask me anything about Divyank.'],
-    ['', 'Try: "What skills does Divyank have?"'],
-    ['muted', 'Or type "help" to see terminal shortcuts.'],
-    ['', ''],
-  ]);
-
-  connectBotpress();
+function normalize(value) {
+  return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
-function connectBotpress() {
-  if (botpressListenersAttached) return;
+function extractText(value, seen = new Set(), depth = 0) {
+  if (value == null || depth > 6) return '';
+  if (typeof value === 'string') return value.trim();
+  if (typeof value !== 'object' || seen.has(value)) return '';
+  seen.add(value);
 
-  if (!window.botpress || typeof window.botpress.on !== 'function') {
-    status.textContent = 'AI LOADING';
-    if (!botpressPoll) {
-      botpressPoll = setInterval(connectBotpress, 150);
+  const preferred = ['text', 'markdown', 'content', 'preview', 'message'];
+  for (const key of preferred) {
+    if (typeof value[key] === 'string' && value[key].trim()) return value[key].trim();
+  }
+
+  if (Array.isArray(value)) {
+    const parts = value.map(item => extractText(item, seen, depth + 1)).filter(Boolean);
+    return parts.join('\n');
+  }
+
+  for (const key of ['payload', 'data', 'message', 'blocks', 'card', 'content']) {
+    if (value[key] !== undefined) {
+      const found = extractText(value[key], seen, depth + 1);
+      if (found) return found;
     }
-    return;
   }
 
-  botpressListenersAttached = true;
-  if (botpressPoll) {
-    clearInterval(botpressPoll);
-    botpressPoll = null;
-  }
-
-  status.textContent = 'AI LOADING';
-
-  try {
-    // Attach the wildcard listener as a low-level diagnostic hook. It does not
-    // change behavior; it lets us see if Botpress is emitting lifecycle events.
-    window.botpress.on('*', (event) => {
-      console.debug('[Botpress *]', event);
-    });
-
-    window.botpress.on('message', handleBotpressMessage);
-
-    window.botpress.on('webchat:initialized', () => {
-      botpressInitialized = true;
-      status.textContent = waitingForAI ? 'THINKING' : 'AI ONLINE';
-      console.debug('[Botpress] webchat:initialized');
-      if (waitingForAI) openForQuestion();
-    });
-
-    window.botpress.on('webchat:ready', () => {
-      botpressInitialized = true;
-      botpressReady = true;
-      status.textContent = waitingForAI ? 'THINKING' : 'AI ONLINE';
-      console.debug('[Botpress] webchat:ready');
-      if (waitingForAI) sendPendingQuestion();
-    });
-
-    window.botpress.on('webchat:opened', () => {
-      console.debug('[Botpress] webchat:opened');
-    });
-
-    window.botpress.on('webchat:closed', () => {
-      console.debug('[Botpress] webchat:closed');
-    });
-
-    window.botpress.on('conversation', (event) => {
-      console.debug('[Botpress] conversation:', event);
-    });
-
-    window.botpress.on('error', (error) => {
-      console.error('[Botpress] error:', error);
-      if (waitingForAI) {
-        failAI(formatBotpressError(error));
-      } else {
-        status.textContent = 'AI ERROR';
-        showDiagnosticOnce(formatBotpressError(error));
-      }
-    });
-
-    // The generated Botpress bundle can initialize before our listener is
-    // attached. If the sendMessage API is already present, Webchat is ready
-    // even if the ready event was missed.
-    detectAlreadyReady();
-  } catch (error) {
-    console.error('Botpress connection setup failed:', error);
-    botpressListenersAttached = false;
-    status.textContent = 'AI ERROR';
-    showDiagnosticOnce('Could not attach to the Botpress Webchat API.');
-  }
+  return '';
 }
 
-function detectAlreadyReady() {
-  try {
-    const api = window.botpress;
-    const hasSendMessage = typeof api?.sendMessage === 'function';
-    const hasOpen = typeof api?.open === 'function';
-    const initialized = api?.initialized === true;
-
-    if (initialized || hasSendMessage) {
-      botpressInitialized = true;
-    }
-    if (hasSendMessage) {
-      botpressReady = true;
-      status.textContent = 'AI ONLINE';
-    }
-
-    console.debug('[Botpress] API state', {
-      initialized,
-      hasOn: typeof api?.on === 'function',
-      hasOpen,
-      hasSendMessage,
-    });
-  } catch (error) {
-    console.debug('[Botpress] state probe failed:', error);
-  }
+function isLikelyBotResponse(message) {
+  const raw = JSON.stringify(message || {}).toLowerCase();
+  return /incoming|bot|received|response/.test(raw);
 }
 
-function openForQuestion() {
+function handleBotpressMessage(message) {
   if (!waitingForAI) return;
 
-  try {
-    if (typeof window.botpress.open !== 'function') {
-      failAI('Botpress initialized, but the Webchat open API is unavailable.');
-      return;
-    }
+  console.debug('[DIVYANK TERMINAL] Botpress message:', message);
+  const text = extractText(message);
+  if (!text) return;
 
-    window.botpress.open();
+  const question = normalize(lastQuestion);
+  const answer = normalize(text);
+  if (!answer || answer === question) return;
 
-    // If the ready event was missed, probe for sendMessage briefly. This also
-    // handles generated embeds whose initialization completes before our
-    // listener is registered.
-    const startedAt = Date.now();
-    const probe = setInterval(() => {
-      if (!waitingForAI) {
-        clearInterval(probe);
-        return;
-      }
+  // Botpress message events cover both user and bot messages. If direction/type
+  // is available, prefer incoming/bot events; otherwise accept the first
+  // non-identical text payload after our request.
+  if (!isLikelyBotResponse(message) && answer === question) return;
 
-      if (typeof window.botpress.sendMessage === 'function') {
-        clearInterval(probe);
-        botpressReady = true;
-        sendPendingQuestion();
-        return;
-      }
+  clearResponseTimeout();
+  waitingForAI = false;
+  status.textContent = 'AI ONLINE';
+  print([['ai', `AI  ${text}`]]);
 
-      if (Date.now() - startedAt > 10000) {
-        clearInterval(probe);
-        failAI('Botpress Webchat opened but never became ready. Check the bot publish status, Client ID, and Allowed Origins for this GitHub Pages domain.');
-      }
-    }, 250);
-  } catch (error) {
-    console.error('[Botpress] open failed:', error);
-    failAI('Botpress Webchat could not be opened. Check the Webchat configuration.');
-  }
+  // Keep the transport alive but remove the visual Webchat surface.
+  try { window.botpress.close(); } catch (_) {}
 }
 
 function clearResponseTimeout() {
@@ -273,91 +172,6 @@ function clearResponseTimeout() {
   }
 }
 
-function handleBotpressMessage(message) {
-  console.debug('Botpress message event:', message);
-  if (!waitingForAI) return;
-
-  const text = extractBotpressText(message);
-  if (!text) return;
-
-  // The Webchat message event fires for both user and bot messages.
-  // Ignore the user's own echoed question and accept the bot response.
-  if (normalize(text) === normalize(lastQuestion)) return;
-
-  clearResponseTimeout();
-  waitingForAI = false;
-  status.textContent = 'AI ONLINE';
-  print([['ai', `AI  ${text}`]]);
-
-  try { window.botpress.close(); } catch (_) {}
-}
-
-function normalize(value) {
-  return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
-}
-
-function extractBotpressText(message) {
-  const candidates = [
-    message,
-    message?.data,
-    message?.message,
-    message?.payload,
-    message?.data?.payload,
-    message?.message?.payload,
-  ];
-
-  for (const candidate of candidates) {
-    if (!candidate) continue;
-    if (typeof candidate === 'string') return candidate;
-    if (typeof candidate.text === 'string') return candidate.text;
-    if (typeof candidate.markdown === 'string') return candidate.markdown;
-    if (candidate.payload && typeof candidate.payload.text === 'string') return candidate.payload.text;
-    if (candidate.payload && typeof candidate.payload.markdown === 'string') return candidate.payload.markdown;
-
-    if (Array.isArray(candidate.blocks)) {
-      const text = candidate.blocks
-        .map(block => block?.text || block?.markdown || block?.payload?.text || '')
-        .filter(Boolean)
-        .join('\n');
-      if (text) return text;
-    }
-  }
-
-  return '';
-}
-
-async function sendPendingQuestion() {
-  if (!waitingForAI || !lastQuestion) return;
-  if (!window.botpress || typeof window.botpress.sendMessage !== 'function') {
-    failAI('Botpress is not ready to receive messages yet.');
-    return;
-  }
-
-  const question = lastQuestion;
-
-  try {
-    await window.botpress.sendMessage(question);
-  } catch (error) {
-    console.error('Botpress message failed:', error);
-    failAI(formatBotpressError(error));
-  }
-}
-
-function formatBotpressError(error) {
-  const raw = error?.message || error?.error || error?.reason || '';
-  if (raw) return `Botpress error: ${raw}`;
-  return 'Botpress reported a connection error. Check the bot publish status, Client ID, and Allowed Origins.';
-}
-
-function showDiagnosticOnce(message) {
-  if (diagnosticShown) return;
-  diagnosticShown = true;
-  print([
-    ['warn', message],
-    ['muted', 'The terminal transport is waiting for a healthy Botpress Webchat connection.'],
-  ]);
-}
-
 function failAI(message) {
   clearResponseTimeout();
   waitingForAI = false;
@@ -365,13 +179,60 @@ function failAI(message) {
   print([['warn', message]]);
 }
 
-async function askAI(question) {
+function attachBotpress() {
   if (!window.botpress || typeof window.botpress.on !== 'function') {
-    print([
-      ['warn', 'AI assistant is still loading.'],
-      ['muted', 'Wait a moment and try again.'],
-    ]);
-    connectBotpress();
+    status.textContent = 'AI LOADING';
+    setTimeout(attachBotpress, 150);
+    return;
+  }
+
+  if (listenersAttached) return;
+  listenersAttached = true;
+
+  // Official Botpress events: message fires for sent/received messages and
+  // wildcard receives all Webchat events.
+  window.botpress.on('message', handleBotpressMessage);
+  window.botpress.on('*', handleBotpressMessage);
+
+  window.botpress.on('webchat:initialized', () => {
+    status.textContent = 'AI ONLINE';
+  });
+
+  window.botpress.on('webchat:ready', () => {
+    botpressReady = true;
+    status.textContent = waitingForAI ? 'THINKING' : 'AI ONLINE';
+    if (waitingForAI) sendPendingQuestion();
+  });
+
+  window.botpress.on('error', error => {
+    console.error('[DIVYANK TERMINAL] Botpress error:', error);
+    if (waitingForAI) failAI(`Botpress error: ${error?.message || 'connection error'}`);
+  });
+
+  // Generated embeds may finish before this script attaches listeners.
+  if (typeof window.botpress.sendMessage === 'function') {
+    botpressReady = true;
+    status.textContent = 'AI ONLINE';
+  }
+}
+
+function sendPendingQuestion() {
+  if (!waitingForAI || !lastQuestion) return;
+  if (typeof window.botpress?.sendMessage !== 'function') {
+    failAI('Botpress is not ready to receive messages yet.');
+    return;
+  }
+
+  window.botpress.sendMessage(lastQuestion).catch(error => {
+    console.error('[DIVYANK TERMINAL] sendMessage failed:', error);
+    failAI(`Botpress error: ${error?.message || 'message could not be sent'}`);
+  });
+}
+
+function askAI(question) {
+  if (!window.botpress || typeof window.botpress.on !== 'function') {
+    print([['warn', 'AI assistant is still loading. Try again in a moment.']]);
+    attachBotpress();
     return;
   }
 
@@ -387,29 +248,25 @@ async function askAI(question) {
 
   clearResponseTimeout();
   responseTimeout = setTimeout(() => {
-    if (!waitingForAI) return;
-    failAI('No response was received from Botpress within 30 seconds. The Webchat connection is not healthy.');
+    if (waitingForAI) {
+      failAI('The AI responded through Botpress, but the terminal did not receive the response event.');
+    }
   }, 30000);
 
+  if (botpressReady && typeof window.botpress.sendMessage === 'function') {
+    sendPendingQuestion();
+    return;
+  }
+
+  if (typeof window.botpress.open !== 'function') {
+    failAI('Botpress Webchat is not initialized yet. Refresh and try again.');
+    return;
+  }
+
   try {
-    detectAlreadyReady();
-
-    if (botpressReady && typeof window.botpress.sendMessage === 'function') {
-      await sendPendingQuestion();
-      return;
-    }
-
-    if (!botpressInitialized) {
-      // The generated embed normally emits webchat:initialized first. If that
-      // event was missed, open() is still safe once the method exists.
-      openForQuestion();
-      return;
-    }
-
-    openForQuestion();
+    window.botpress.open();
   } catch (error) {
-    console.error('Botpress open/send failed:', error);
-    failAI('The AI connection could not be opened. Check the Webchat configuration.');
+    failAI('Could not initialize the Botpress transport.');
   }
 }
 
@@ -418,7 +275,7 @@ function isNaturalLanguageQuestion(raw) {
   return words.length >= 3 || /[?!.,]/.test(raw);
 }
 
-form.addEventListener('submit', async (event) => {
+form.addEventListener('submit', event => {
   event.preventDefault();
   const raw = input.value.trim();
   if (!raw) return;
@@ -433,11 +290,8 @@ form.addEventListener('submit', async (event) => {
   const remainder = raw.slice(command.length).trim();
 
   if (command === 'ask') {
-    if (!remainder) {
-      print([['warn', 'Usage: ask <your question>']]);
-      return;
-    }
-    await askAI(remainder);
+    if (!remainder) print([['warn', 'Usage: ask <your question>']]);
+    else askAI(remainder);
     return;
   }
 
@@ -451,10 +305,10 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
-  await askAI(raw);
+  askAI(raw);
 });
 
-input.addEventListener('keydown', (event) => {
+input.addEventListener('keydown', event => {
   if (event.key === 'ArrowUp') {
     event.preventDefault();
     if (historyIndex > 0) input.value = history[--historyIndex];
@@ -467,4 +321,17 @@ input.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('click', () => input.focus());
-welcome();
+
+print([
+  ['accent', '╭──────────────────────────────────────────────────────╮'],
+  ['accent', '│              DIVYANK BHARDWAJ                       │'],
+  ['accent', '│        Interactive Engineering Terminal             │'],
+  ['accent', '╰──────────────────────────────────────────────────────╯'],
+  ['', ''],
+  ['', 'Welcome. Ask me anything about Divyank.'],
+  ['', 'Try: "What skills does Divyank have?"'],
+  ['muted', 'Or type "help" to see terminal shortcuts.'],
+  ['', ''],
+]);
+
+attachBotpress();
