@@ -27,6 +27,20 @@
 
 ###
 
+<h3 align="left">⚡ Interactive Terminal</h3>
+
+###
+
+<div align="center">
+  <a href="./terminal/">
+    <img src="https://img.shields.io/badge/▶%20LAUNCH%20INTERACTIVE%20TERMINAL-11161D?style=for-the-badge&logo=gnubash&logoColor=7EE787" alt="Launch Interactive Terminal" />
+  </a>
+</div>
+
+<p align="center"><sub>Try commands like <code>about</code>, <code>skills</code>, <code>projects</code>, <code>repos</code>, <code>journey</code>, and <code>contact</code>.</sub></p>
+
+###
+
 <h3 align="left">🛠 Language and tools</h3>
 
 ###
