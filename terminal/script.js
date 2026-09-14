@@ -10,6 +10,8 @@ let botpressListenersAttached = false;
 let waitingForAI = false;
 let lastQuestion = '';
 let responseTimeout = null;
+let botpressPoll = null;
+let diagnosticShown = false;
 
 const commands = {
   help: () => [
@@ -127,41 +129,140 @@ function connectBotpress() {
 
   if (!window.botpress || typeof window.botpress.on !== 'function') {
     status.textContent = 'AI LOADING';
-    setTimeout(connectBotpress, 150);
+    if (!botpressPoll) {
+      botpressPoll = setInterval(connectBotpress, 150);
+    }
     return;
   }
 
   botpressListenersAttached = true;
+  if (botpressPoll) {
+    clearInterval(botpressPoll);
+    botpressPoll = null;
+  }
+
   status.textContent = 'AI LOADING';
 
   try {
+    // Attach the wildcard listener as a low-level diagnostic hook. It does not
+    // change behavior; it lets us see if Botpress is emitting lifecycle events.
+    window.botpress.on('*', (event) => {
+      console.debug('[Botpress *]', event);
+    });
+
     window.botpress.on('message', handleBotpressMessage);
 
     window.botpress.on('webchat:initialized', () => {
       botpressInitialized = true;
-      status.textContent = 'AI ONLINE';
+      status.textContent = waitingForAI ? 'THINKING' : 'AI ONLINE';
+      console.debug('[Botpress] webchat:initialized');
+      if (waitingForAI) openForQuestion();
     });
 
     window.botpress.on('webchat:ready', () => {
       botpressInitialized = true;
       botpressReady = true;
       status.textContent = waitingForAI ? 'THINKING' : 'AI ONLINE';
+      console.debug('[Botpress] webchat:ready');
       if (waitingForAI) sendPendingQuestion();
     });
 
+    window.botpress.on('webchat:opened', () => {
+      console.debug('[Botpress] webchat:opened');
+    });
+
+    window.botpress.on('webchat:closed', () => {
+      console.debug('[Botpress] webchat:closed');
+    });
+
+    window.botpress.on('conversation', (event) => {
+      console.debug('[Botpress] conversation:', event);
+    });
+
     window.botpress.on('error', (error) => {
-      console.error('Botpress error:', error);
+      console.error('[Botpress] error:', error);
       if (waitingForAI) {
-        clearResponseTimeout();
-        waitingForAI = false;
+        failAI(formatBotpressError(error));
+      } else {
         status.textContent = 'AI ERROR';
-        print([['warn', 'Botpress returned an error while processing the question.']]);
+        showDiagnosticOnce(formatBotpressError(error));
       }
     });
+
+    // The generated Botpress bundle can initialize before our listener is
+    // attached. If the sendMessage API is already present, Webchat is ready
+    // even if the ready event was missed.
+    detectAlreadyReady();
   } catch (error) {
     console.error('Botpress connection setup failed:', error);
     botpressListenersAttached = false;
     status.textContent = 'AI ERROR';
+    showDiagnosticOnce('Could not attach to the Botpress Webchat API.');
+  }
+}
+
+function detectAlreadyReady() {
+  try {
+    const api = window.botpress;
+    const hasSendMessage = typeof api?.sendMessage === 'function';
+    const hasOpen = typeof api?.open === 'function';
+    const initialized = api?.initialized === true;
+
+    if (initialized || hasSendMessage) {
+      botpressInitialized = true;
+    }
+    if (hasSendMessage) {
+      botpressReady = true;
+      status.textContent = 'AI ONLINE';
+    }
+
+    console.debug('[Botpress] API state', {
+      initialized,
+      hasOn: typeof api?.on === 'function',
+      hasOpen,
+      hasSendMessage,
+    });
+  } catch (error) {
+    console.debug('[Botpress] state probe failed:', error);
+  }
+}
+
+function openForQuestion() {
+  if (!waitingForAI) return;
+
+  try {
+    if (typeof window.botpress.open !== 'function') {
+      failAI('Botpress initialized, but the Webchat open API is unavailable.');
+      return;
+    }
+
+    window.botpress.open();
+
+    // If the ready event was missed, probe for sendMessage briefly. This also
+    // handles generated embeds whose initialization completes before our
+    // listener is registered.
+    const startedAt = Date.now();
+    const probe = setInterval(() => {
+      if (!waitingForAI) {
+        clearInterval(probe);
+        return;
+      }
+
+      if (typeof window.botpress.sendMessage === 'function') {
+        clearInterval(probe);
+        botpressReady = true;
+        sendPendingQuestion();
+        return;
+      }
+
+      if (Date.now() - startedAt > 10000) {
+        clearInterval(probe);
+        failAI('Botpress Webchat opened but never became ready. Check the bot publish status, Client ID, and Allowed Origins for this GitHub Pages domain.');
+      }
+    }, 250);
+  } catch (error) {
+    console.error('[Botpress] open failed:', error);
+    failAI('Botpress Webchat could not be opened. Check the Webchat configuration.');
   }
 }
 
@@ -188,8 +289,6 @@ function handleBotpressMessage(message) {
   status.textContent = 'AI ONLINE';
   print([['ai', `AI  ${text}`]]);
 
-  // We only need Webchat to be opened long enough for Botpress to mark it
-  // ready. Close it again so the visitor stays in the custom terminal UI.
   try { window.botpress.close(); } catch (_) {}
 }
 
@@ -230,7 +329,7 @@ function extractBotpressText(message) {
 async function sendPendingQuestion() {
   if (!waitingForAI || !lastQuestion) return;
   if (!window.botpress || typeof window.botpress.sendMessage !== 'function') {
-    failAI('Botpress became ready, but its sendMessage API is unavailable.');
+    failAI('Botpress is not ready to receive messages yet.');
     return;
   }
 
@@ -240,8 +339,23 @@ async function sendPendingQuestion() {
     await window.botpress.sendMessage(question);
   } catch (error) {
     console.error('Botpress message failed:', error);
-    failAI('The AI could not send that message. Try again.');
+    failAI(formatBotpressError(error));
   }
+}
+
+function formatBotpressError(error) {
+  const raw = error?.message || error?.error || error?.reason || '';
+  if (raw) return `Botpress error: ${raw}`;
+  return 'Botpress reported a connection error. Check the bot publish status, Client ID, and Allowed Origins.';
+}
+
+function showDiagnosticOnce(message) {
+  if (diagnosticShown) return;
+  diagnosticShown = true;
+  print([
+    ['warn', message],
+    ['muted', 'The terminal transport is waiting for a healthy Botpress Webchat connection.'],
+  ]);
 }
 
 function failAI(message) {
@@ -274,27 +388,28 @@ async function askAI(question) {
   clearResponseTimeout();
   responseTimeout = setTimeout(() => {
     if (!waitingForAI) return;
-    failAI('No response was received from Botpress within 30 seconds.');
+    failAI('No response was received from Botpress within 30 seconds. The Webchat connection is not healthy.');
   }, 30000);
 
-  // IMPORTANT: Botpress documents that sendMessage is only available after
-  // Webchat is opened and the webchat:ready event fires. The previous version
-  // called sendMessage before that lifecycle event, which caused the terminal
-  // to sit in THINKING. Open only when the visitor actually asks a question.
   try {
-    if (!botpressReady) {
-      if (typeof window.botpress.open !== 'function') {
-        failAI('Botpress Webchat has not initialized yet. Refresh and try again.');
-        return;
-      }
-      window.botpress.open();
+    detectAlreadyReady();
+
+    if (botpressReady && typeof window.botpress.sendMessage === 'function') {
+      await sendPendingQuestion();
       return;
     }
 
-    await sendPendingQuestion();
+    if (!botpressInitialized) {
+      // The generated embed normally emits webchat:initialized first. If that
+      // event was missed, open() is still safe once the method exists.
+      openForQuestion();
+      return;
+    }
+
+    openForQuestion();
   } catch (error) {
     console.error('Botpress open/send failed:', error);
-    failAI('The AI connection could not be opened. Refresh and try again.');
+    failAI('The AI connection could not be opened. Check the Webchat configuration.');
   }
 }
 
