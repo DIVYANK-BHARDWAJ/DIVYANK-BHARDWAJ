@@ -1,86 +1,75 @@
 <div align="center">
-  <img height="150" src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" />
+
+# DIVYANK BHARDWAJ
+
+### Computer Science Student · Software Developer · Systems Enthusiast
+
+Building things, understanding how they work, and learning to make them scale.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/divyank-bhardwaj-46655429b/)
+[![Interactive Terminal](https://img.shields.io/badge/Interactive_Terminal-Launch-161B22?style=for-the-badge&logo=gnubash&logoColor=7EE787)](https://DIVYANK-BHARDWAJ.github.io/DIVYANK-BHARDWAJ/)
+
 </div>
 
-###
+---
 
-<div align="center">
-  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="linkedin logo" />
-  <img src="https://img.shields.io/static/v1?message=Youtube&logo=youtube&label=&color=FF0000&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="youtube logo" />
-  <img src="https://img.shields.io/static/v1?message=Twitter&logo=twitter&label=&color=1DA1F2&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="twitter logo" />
-  <img src="https://img.shields.io/static/v1?message=Instagram&logo=instagram&label=&color=E4405F&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="instagram logo" />
-  <img src="https://img.shields.io/static/v1?message=HackerRank&logo=hackerrank&label=&color=2EC866&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="hackerrank logo" />
-  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="gmail logo" />
-</div>
+<table>
+  <tr>
+    <td width="62%" valign="middle">
+      <h2>👨‍💻 About Me</h2>
+      <p>I'm a Computer Science and Engineering student who enjoys turning ideas into working software and understanding the engineering beneath the abstractions.</p>
+      <ul>
+        <li>📚 Strengthening my foundations in <strong>Data Structures &amp; Algorithms, core CS, and software engineering</strong>.</li>
+        <li>🧩 Building across the stack: <strong>web development, APIs, databases, deployment, and automation</strong>.</li>
+        <li>🤖 Exploring <strong>AI/ML and AI-native software</strong> beyond simple API integrations.</li>
+        <li>☁️ Learning how reliable systems are built with <strong>Linux, cloud infrastructure, CI/CD, and distributed-systems concepts</strong>.</li>
+        <li>🏆 Enjoying hackathons, collaborative builds, and open-source opportunities that challenge me to learn quickly and make better engineering decisions.</li>
+      </ul>
+      <p>My approach: <strong>learn deeply → build deliberately → ship → understand the trade-offs → repeat.</strong></p>
+    </td>
+    <td width="38%" align="center" valign="middle">
+      <img src="assets/profile-3d-accent.svg" width="340" alt="Static 3D-inspired abstract technology sculpture in blue and violet" />
+    </td>
+  </tr>
+</table>
 
-###
+## ⚡ Explore My Interactive Terminal
 
-<h1 align="center">hey there 👋</h1>
-
-###
-
-<h3 align="left">👨‍💻 About Me</h3>
-
-###
-
-<p align="left">🚀 Computer Science Engineering student who enjoys turning ideas into real, working software and understanding what happens behind the abstractions.<br><br>🧠 Currently building a strong foundation across <b>Data Structures & Algorithms, Web Development, Software Engineering, Computer Science fundamentals, and AI/ML</b>.<br><br>💻 I enjoy building projects that go beyond basic CRUD applications — focusing on <b>clean architecture, scalability, APIs, databases, authentication, deployment, automation, and real-world engineering practices</b>.<br><br>⚙️ My long-term goal is to become a strong <b>Software Engineer</b> capable of working across the stack — from frontend experiences and backend systems to distributed infrastructure and AI-powered applications.<br><br>☁️ Exploring the engineering ecosystem around <b>Linux, Git, Docker, Kubernetes, AWS, CI/CD, databases, cloud infrastructure, and system design</b> while continuously strengthening my fundamentals.<br><br>🤖 Particularly interested in the intersection of <b>AI and software engineering</b> — building useful AI-native systems rather than simply integrating an API and calling it a project.<br><br>🏗️ I like challenging myself with ambitious projects that force me to learn new concepts, debug difficult problems, make architectural decisions, and understand the trade-offs behind them.<br><br>🏆 Beyond development, I actively participate in <b>hackathons, technical competitions, open-source opportunities, and collaborative projects</b> to test my skills in real-world environments.<br><br>📚 I believe strong engineers are built through fundamentals, consistency, curiosity, and the willingness to understand <i>why</i> something works — not just <i>how</i> to make it work.<br><br>🎯 My current mission: <b>learn deeply → build relentlessly → ship real systems → contribute to the community → keep raising the bar.</b></p>
-
-###
-
-<h3 align="left">⚡ Interactive Terminal</h3>
-
-###
+A terminal-style way to explore my profile, skills, projects, repositories, journey, and contact details.
 
 <div align="center">
   <a href="https://DIVYANK-BHARDWAJ.github.io/DIVYANK-BHARDWAJ/">
-    <img src="https://img.shields.io/badge/▶%20LAUNCH%20INTERACTIVE%20TERMINAL-11161D?style=for-the-badge&logo=gnubash&logoColor=7EE787" alt="Launch Interactive Terminal" />
+    <img src="https://img.shields.io/badge/▶_LAUNCH_INTERACTIVE_TERMINAL-11161D?style=for-the-badge&logo=gnubash&logoColor=7EE787" alt="Launch interactive terminal" />
   </a>
+  <p><sub>Try commands such as <code>about</code>, <code>skills</code>, <code>projects</code>, <code>repos</code>, <code>journey</code>, and <code>contact</code>.</sub></p>
 </div>
 
-<p align="center"><sub>Try commands like <code>about</code>, <code>skills</code>, <code>projects</code>, <code>repos</code>, <code>journey</code>, and <code>contact</code>.</sub></p>
-
-###
-
-<h3 align="left">🛠 Language and tools</h3>
-
-###
-
-<div align="left">
-  <img src="https://skillicons.dev/icons?i=python,java,c,cpp,javascript,typescript,html,css,git,github,gitlab,linux,bash,vscode,idea,anaconda,nodejs,express,react,nextjs,tailwind,redux,postgres,mysql,mongodb,prisma,redis,nginx,docker,kubernetes,aws,terraform,githubactions,postman,figma,notion,jira&perline=10" alt="Languages and tools" />
-</div>
-
-###
-
-<h3 align="left">🔥 My Stats</h3>
-
-###
+## 🛠 Languages, Tools & Technologies
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=DIVYANK-BHARDWAJ&theme=burnt-neon&timezone=Asia%2FKolkata" alt="GitHub Streak" />
+  <img src="https://skillicons.dev/icons?i=java,python,c,cpp,javascript,typescript,html,css,react,nextjs,tailwind,redux,nodejs,express,postgres,mysql,mongodb,prisma,redis,git,github,gitlab,linux,bash,docker,kubernetes,aws,terraform,githubactions,nginx,postman,figma,notion,jira&perline=9" alt="Languages, frameworks, databases, and developer tools" />
 </div>
 
-###
+<p align="center"><sub>A growing toolkit—continually learning, building, and deepening the fundamentals behind each technology.</sub></p>
 
-<div align="left">
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/discord/default.svg" width="52" height="40" alt="discord logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg" width="52" height="40" alt="youtube logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="instagram logo" />
-  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/hackerrank/default.svg" width="52" height="40" alt="hackerrank logo" />
-</div>
-
-###
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg">
-</picture>
-
-###
+## 📈 GitHub Activity
 
 <div align="center">
-  <img height="300" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1read&fit=crop" />
+  <img src="https://streak-stats.demolab.com?user=DIVYANK-BHARDWAJ&theme=github-dark-blue&hide_border=true&timezone=Asia%2FKolkata" alt="GitHub contribution streak" />
 </div>
 
-###
+<div align="center">
+  <sub>Contribution activity</sub>
+  <br/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg">
+    <img alt="Pac-Man contribution graph" src="https://raw.githubusercontent.com/DIVYANK-BHARDWAJ/DIVYANK-BHARDWAJ/output/pacman-contribution-graph.svg" />
+  </picture>
+</div>
+
+---
+
+<div align="center">
+  <i>Curiosity for the details. Ambition for the systems. Consistency in the work.</i>
+</div>
