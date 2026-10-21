@@ -18,7 +18,7 @@
 <h1 align="center">hey there 👋</h1>
 
 <div align="center">
-  <img src="assets/animated-3d-orbit.svg" width="240" alt="Animated blue and violet 3D geometric orb with rotating orbital rings" />
+  <img src="assets/profile-action-figure.jpg" width="520" alt="Cinematic 3D cloaked developer action figure using a laptop, surrounded by holographic code panels" />
 </div>
 
 ###
