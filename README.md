@@ -16,19 +16,16 @@ Building things, understanding how they work, and learning to make them scale.
 <table>
   <tr>
     <td width="62%" valign="middle">
-
-## 👨‍💻 About Me
-
-I'm a Computer Science and Engineering student who enjoys turning ideas into working software and understanding the engineering beneath the abstractions.
-
-- 📚 Strengthening my foundations in **Data Structures & Algorithms, core CS, and software engineering**.
-- 🧩 Building across the stack: **web development, APIs, databases, deployment, and automation**.
-- 🤖 Exploring **AI/ML and AI-native software** beyond simple API integrations.
-- ☁️ Learning how reliable systems are built with **Linux, cloud infrastructure, CI/CD, and distributed-systems concepts**.
-- 🏆 Enjoying hackathons, collaborative builds, and open-source opportunities that challenge me to learn quickly and make better engineering decisions.
-
-My approach: **learn deeply → build deliberately → ship → understand the trade-offs → repeat.**
-
+      <h2>👨‍💻 About Me</h2>
+      <p>I'm a Computer Science and Engineering student who enjoys turning ideas into working software and understanding the engineering beneath the abstractions.</p>
+      <ul>
+        <li>📚 Strengthening my foundations in <strong>Data Structures &amp; Algorithms, core CS, and software engineering</strong>.</li>
+        <li>🧩 Building across the stack: <strong>web development, APIs, databases, deployment, and automation</strong>.</li>
+        <li>🤖 Exploring <strong>AI/ML and AI-native software</strong> beyond simple API integrations.</li>
+        <li>☁️ Learning how reliable systems are built with <strong>Linux, cloud infrastructure, CI/CD, and distributed-systems concepts</strong>.</li>
+        <li>🏆 Enjoying hackathons, collaborative builds, and open-source opportunities that challenge me to learn quickly and make better engineering decisions.</li>
+      </ul>
+      <p>My approach: <strong>learn deeply → build deliberately → ship → understand the trade-offs → repeat.</strong></p>
     </td>
     <td width="38%" align="center" valign="middle">
       <img src="assets/profile-3d-accent.svg" width="340" alt="Static 3D-inspired abstract technology sculpture in blue and violet" />
