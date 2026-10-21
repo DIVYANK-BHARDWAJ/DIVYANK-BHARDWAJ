@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="260" viewBox="0 0 420 260" fill="none">
+  <defs>
+    <radialGradient id="core" cx="0" cy="0" r="1" gradientTransform="translate(210 123) rotate(90) scale(74)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DFF8FF"/>
+      <stop offset=".32" stop-color="#72CFFF"/>
+      <stop offset=".68" stop-color="#6878FF"/>
+      <stop offset="1" stop-color="#5139B8"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="112" y1="78" x2="304" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9DEBFF"/>
+      <stop offset=".5" stop-color="#657CFF"/>
+      <stop offset="1" stop-color="#B9A2FF"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="145" y1="170" x2="272" y2="209" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#28496B"/>
+      <stop offset=".5" stop-color="#4779B4"/>
+      <stop offset="1" stop-color="#27324E"/>
+    </linearGradient>
+    <filter id="softGlow" x="80" y="12" width="260" height="230" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="15"/>
+    </filter>
+  </defs>
+  <ellipse cx="210" cy="132" rx="95" ry="86" fill="#5477FF" fill-opacity=".17" filter="url(#softGlow)"/>
+  <g opacity=".42" stroke="#6383A8" stroke-width="1">
+    <path d="M35 71h40M55 51v40M341 57h43M362 36v43M44 198h45M66 176v44M337 202h42M358 181v42"/>
+    <circle cx="93" cy="91" r="2" fill="#81DFFF" stroke="none"/>
+    <circle cx="325" cy="112" r="2" fill="#B8A4FF" stroke="none"/>
+    <circle cx="116" cy="187" r="2" fill="#81DFFF" stroke="none"/>
+  </g>
+  <ellipse cx="210" cy="205" rx="80" ry="11" fill="#050912" fill-opacity=".45"/>
+  <path d="M139 185 163 162h95l24 23-17 22H156l-17-22Z" fill="#17283E" stroke="url(#edge)" stroke-width="1.5"/>
+  <path d="M158 184h104M168 194h84" stroke="#7192B8" stroke-opacity=".65" stroke-width="1.5"/>
+  <g>
+    <ellipse cx="210" cy="121" rx="65" ry="79" stroke="url(#ring)" stroke-width="2.2" transform="rotate(24 210 121)">
+      <animateTransform attributeName="transform" type="rotate" values="24 210 121; -18 210 121; 24 210 121" dur="9s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="210" cy="121" rx="82" ry="48" stroke="url(#ring)" stroke-width="2.4" transform="rotate(-24 210 121)">
+      <animateTransform attributeName="transform" type="rotate" values="-24 210 121; 12 210 121; -24 210 121" dur="7s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="210" cy="121" rx="74" ry="30" stroke="#8DDFFF" stroke-opacity=".65" stroke-width="1.2" transform="rotate(56 210 121)">
+      <animateTransform attributeName="transform" type="rotate" values="56 210 121; 92 210 121; 56 210 121" dur="11s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  <g>
+    <path d="M210 66 250 89 260 132 234 164 193 164 161 137 166 96 210 66Z" fill="url(#core)" stroke="#D6F7FF" stroke-opacity=".9" stroke-width="1.5">
+      <animateTransform attributeName="transform" type="translate" values="0 3; 0 -5; 0 3" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M210 66 211 109 250 89M211 109 260 132M211 109 193 164M211 109 161 137M211 109 166 96M211 109 234 164" stroke="#D8F5FF" stroke-opacity=".46" stroke-width="1.2">
+      <animateTransform attributeName="transform" type="translate" values="0 3; 0 -5; 0 3" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M184 111 195 103 203 112 199 123 189 124 184 111Z" fill="#101A35" stroke="#D9F8FF" stroke-width="1.2"/>
+    <path d="M219 111 230 103 238 112 234 123 224 124 219 111Z" fill="#101A35" stroke="#D9F8FF" stroke-width="1.2"/>
+    <path d="M198 139 211 145 224 139" stroke="#E7F9FF" stroke-width="1.7" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="128" cy="126" r="7" fill="#102B43" stroke="#70DFFF"/>
+    <path d="M124 126h8M128 122v8" stroke="#8EEAFF" stroke-width="1.3" stroke-linecap="round"/>
+    <circle cx="294" cy="142" r="7" fill="#21183D" stroke="#B19CFF"/>
+    <path d="m291 142 2 2 4-5" stroke="#C8B8FF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="287" cy="77" r="2.5" fill="#B7A4FF">
+      <animate attributeName="cy" values="77;71;77" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="132" cy="165" r="2.5" fill="#81DFFF">
+      <animate attributeName="cy" values="165;171;165" dur="2.7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
